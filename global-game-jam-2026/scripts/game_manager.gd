@@ -4,6 +4,12 @@ var start_game_handle:Control
 var gameplay_handle:Control
 var end_game_handle:Control
 
+var button_A:ShapeButtonController
+var button_B:ShapeButtonController
+var button_C:ShapeButtonController
+
+var shape_parent:Control
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Global.pre_scene_started.connect(on_pre_scene_started)
@@ -18,6 +24,12 @@ func get_refs():
 	start_game_handle = get_node("/root/main/ui/ui_start_menu")
 	gameplay_handle = get_node("/root/main/ui/ui_gameplay")
 	end_game_handle = get_node("/root/main/ui/ui_end_menu")
+	
+	shape_parent = get_node("/root/main/shape_parent")
+	
+	button_A = get_node("/root/main/shape_button_A")
+	button_B = get_node("/root/main/shape_button_B")
+	button_C = get_node("/root/main/shape_button_C")
 	
 	
 func on_pre_scene_started():
@@ -34,10 +46,21 @@ func setup():
 	end_game_handle.get_node("end_game_button").pressed.connect(on_restart_button_pressed)
 	gameplay_handle.get_node("gameplay_skip_button").pressed.connect(on_gameplay_skip_pressed)
 	
+	button_A.set_gameplay_shape(Global.GameplayShapes.CIRCLE)
+	button_A.setup()
+
+	button_B.set_gameplay_shape(Global.GameplayShapes.RECT)
+	button_B.setup()
+	
+	button_C.set_gameplay_shape(Global.GameplayShapes.LINE)
+	button_C.setup()	
+	
 	Global.on_start.emit()
 	
 func on_start():
 	start_game_handle.visible = true
+	await get_tree().create_timer(1.0).timeout
+	ImageManager.setup()
 
 func on_gameplay_started():
 	start_game_handle.visible = false
