@@ -1,0 +1,102 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuo3ptjxqjx3y"]
+
+[ext_resource type="Script" uid="uid://c8vp8nliks2wp" path="res://scripts/main_scene_controller.gd" id="1_ig7tw"]
+[ext_resource type="Theme" uid="uid://cmvlrwijt41ol" path="res://art/misc/main_theme.tres" id="2_0xm2m"]
+
+[node name="main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ig7tw")
+
+[node name="ui" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ui_start_menu" type="Control" parent="ui"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="start_game_label" type="Label" parent="ui/ui_start_menu"]
+layout_mode = 0
+offset_left = 365.0
+offset_top = 252.0
+offset_right = 765.0
+offset_bottom = 340.0
+theme = ExtResource("2_0xm2m")
+theme_override_font_sizes/font_size = 64
+text = "START MENU"
+
+[node name="start_game_button" type="Button" parent="ui/ui_start_menu"]
+layout_mode = 0
+offset_left = 499.0
+offset_top = 354.0
+offset_right = 592.0
+offset_bottom = 385.0
+theme = ExtResource("2_0xm2m")
+text = "Start game"
+
+[node name="gameplay_skip_button" type="Button" parent="ui/ui_start_menu"]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 29.0
+offset_right = 169.0
+offset_bottom = 60.0
+text = "SKIP GAMEPLAY"
+
+[node name="gameplay_label" type="Label" parent="ui/ui_start_menu/gameplay_skip_button"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 38.0
+offset_right = 106.0
+offset_bottom = 61.0
+text = "Gameplay!"
+
+[node name="ui_end_menu" type="Control" parent="ui"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="end_game_label" type="Label" parent="ui/ui_end_menu"]
+layout_mode = 0
+offset_left = 365.0
+offset_top = 252.0
+offset_right = 765.0
+offset_bottom = 340.0
+theme = ExtResource("2_0xm2m")
+theme_override_font_sizes/font_size = 64
+text = "GAME END"
+
+[node name="end_game_button" type="Button" parent="ui/ui_end_menu"]
+layout_mode = 0
+offset_left = 505.0
+offset_top = 354.0
+offset_right = 583.0
+offset_bottom = 385.0
+theme = ExtResource("2_0xm2m")
+text = "Restart"
+
+[node name="ui_gameplay" type="Control" parent="ui"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
