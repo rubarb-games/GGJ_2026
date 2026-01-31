@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cuo3ptjxqjx3y"]
+[gd_scene load_steps=9 format=3 uid="uid://cuo3ptjxqjx3y"]
 
 [ext_resource type="Script" uid="uid://c8vp8nliks2wp" path="res://scripts/main_scene_controller.gd" id="1_ig7tw"]
 [ext_resource type="Theme" uid="uid://cmvlrwijt41ol" path="res://art/misc/main_theme.tres" id="2_0xm2m"]
@@ -12,6 +12,9 @@ viewport_path = NodePath("SubViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_h2yge"]
 viewport_path = NodePath("SubViewport")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_7mycd"]
+viewport_path = NodePath("SubViewport")
+
 [node name="main" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -21,7 +24,150 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ig7tw")
 
+[node name="shape_button_A" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 0
+offset_left = 143.0
+offset_top = 667.0
+offset_right = 239.0
+offset_bottom = 763.0
+script = ExtResource("3_1bvp3")
+
+[node name="Button" type="Button" parent="shape_button_A"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "CIRCLE"
+
+[node name="shape_button_B" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 0
+offset_left = 279.0
+offset_top = 667.0
+offset_right = 375.0
+offset_bottom = 763.0
+script = ExtResource("3_1bvp3")
+
+[node name="Button" type="Button" parent="shape_button_B"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "RECT"
+
+[node name="shape_button_C" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 0
+offset_left = 414.0
+offset_top = 667.0
+offset_right = 510.0
+offset_bottom = 763.0
+script = ExtResource("3_1bvp3")
+
+[node name="Button" type="Button" parent="shape_button_C"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "TRIANGLE"
+
+[node name="backing" type="ColorRect" parent="."]
+unique_name_in_owner = true
+z_index = -2
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 640.0
+mouse_filter = 2
+
+[node name="texture_image" type="TextureRect" parent="backing"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+texture = SubResource("ViewportTexture_lquwl")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="backing"]
+self_modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 0
+offset_left = 23.0
+offset_top = 673.0
+offset_right = 119.0
+offset_bottom = 769.0
+texture = SubResource("ViewportTexture_h2yge")
+
+[node name="shape_parent" type="Control" parent="."]
+unique_name_in_owner = true
+z_index = -2
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="backing2" type="ColorRect" parent="."]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 640.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="texture_overlay" type="TextureRect" parent="backing2"]
+texture_filter = 1
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("ViewportTexture_7mycd")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+snap_2d_vertices_to_pixel = true
+size = Vector2i(64, 64)
+size_2d_override = Vector2i(640, 640)
+size_2d_override_stretch = true
+
+[node name="viewport_backing" type="ColorRect" parent="SubViewport"]
+unique_name_in_owner = true
+offset_right = 640.0
+offset_bottom = 640.0
+
+[node name="viewport_texture_image" type="TextureRect" parent="SubViewport/viewport_backing"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_h2yge")
+expand_mode = 1
+script = ExtResource("5_lquwl")
+
+[node name="viewport_shape_parent" type="Control" parent="SubViewport"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+
 [node name="ui" type="Control" parent="."]
+z_index = 6
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -288,6 +434,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="timer_text_label" type="Label" parent="ui/ui_gameplay/timer"]
 unique_name_in_owner = true
@@ -314,123 +461,3 @@ theme_override_font_sizes/font_size = 32
 text = "[xx]"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="shape_button_A" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(96, 96)
-layout_mode = 0
-offset_left = 143.0
-offset_top = 667.0
-offset_right = 239.0
-offset_bottom = 763.0
-script = ExtResource("3_1bvp3")
-
-[node name="Button" type="Button" parent="shape_button_A"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "CIRCLE"
-
-[node name="shape_button_B" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(96, 96)
-layout_mode = 0
-offset_left = 279.0
-offset_top = 667.0
-offset_right = 375.0
-offset_bottom = 763.0
-script = ExtResource("3_1bvp3")
-
-[node name="Button" type="Button" parent="shape_button_B"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "RECT"
-
-[node name="shape_button_C" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(96, 96)
-layout_mode = 0
-offset_left = 414.0
-offset_top = 667.0
-offset_right = 510.0
-offset_bottom = 763.0
-script = ExtResource("3_1bvp3")
-
-[node name="Button" type="Button" parent="shape_button_C"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "LINE"
-
-[node name="backing" type="ColorRect" parent="."]
-unique_name_in_owner = true
-z_index = -2
-layout_mode = 0
-offset_right = 640.0
-offset_bottom = 640.0
-mouse_filter = 2
-
-[node name="texture_image" type="TextureRect" parent="backing"]
-unique_name_in_owner = true
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = SubResource("ViewportTexture_lquwl")
-expand_mode = 1
-
-[node name="TextureRect" type="TextureRect" parent="backing"]
-self_modulate = Color(1, 1, 1, 0)
-texture_filter = 1
-custom_minimum_size = Vector2(96, 96)
-layout_mode = 0
-offset_left = 23.0
-offset_top = 673.0
-offset_right = 119.0
-offset_bottom = 769.0
-texture = SubResource("ViewportTexture_h2yge")
-
-[node name="SubViewport" type="SubViewport" parent="."]
-snap_2d_vertices_to_pixel = true
-size = Vector2i(64, 64)
-size_2d_override = Vector2i(640, 640)
-size_2d_override_stretch = true
-
-[node name="viewport_backing" type="ColorRect" parent="SubViewport"]
-unique_name_in_owner = true
-offset_right = 640.0
-offset_bottom = 640.0
-
-[node name="viewport_texture_image" type="TextureRect" parent="SubViewport/viewport_backing"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_h2yge")
-expand_mode = 1
-script = ExtResource("5_lquwl")
-
-[node name="viewport_shape_parent" type="Control" parent="SubViewport"]
-unique_name_in_owner = true
-layout_mode = 3
-anchors_preset = 0
-
-[node name="shape_parent" type="Control" parent="."]
-unique_name_in_owner = true
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0

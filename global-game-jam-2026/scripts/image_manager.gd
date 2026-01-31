@@ -22,7 +22,7 @@ var shapes_placed:int = 0
 var max_shapes_placed:int = 3
 
 var current_time:float = 0.0
-var max_time:float = 30.0
+var max_time:float = 10.0
 var timer_active:bool = false
 
 var default_pixels:AmericanPixels
@@ -131,7 +131,7 @@ func stop_gameplay():
 	
 	total_score.append(blue_score - white_score)
 	
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.25).timeout
 	popup_status_text("Certified \n OK!",1.0)
 	await get_tree().create_timer(0.5).timeout
 	b_l.position.x = -300.0

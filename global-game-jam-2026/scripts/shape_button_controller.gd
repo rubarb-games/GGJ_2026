@@ -13,17 +13,8 @@ func setup():
 
 func on_button_down():
 	if GameManager.is_placing():
-		instance_scene()
-	
-func instance_scene():
-	var active_shape:ShapeController = current_scene.instantiate()
-	
-	GameManager.shape_parent.add_child(active_shape)
-	active_shape.global_position = get_viewport().get_mouse_position()
-	active_shape.setup()
-	active_shape.set_mirror_parent(ImageManager.mirror_parent)
-
-	Global.shape_spawned.emit()
+		GameManager.set_shape(shape)
+		GameManager.instance_scene()
 
 func set_gameplay_shape(p_shape:Global.GameplayShapes):
 	shape = p_shape

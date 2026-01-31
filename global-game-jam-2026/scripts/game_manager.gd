@@ -11,7 +11,18 @@ var button_A:ShapeButtonController
 var button_B:ShapeButtonController
 var button_C:ShapeButtonController
 
+var circle_scene:PackedScene = preload("res://prefabs/pf_shape_circle.tscn")
+var rect_scene:PackedScene = preload("res://prefabs/pf_shape_rect.tscn")
+var line_scene:PackedScene = preload("res://prefabs/pf_shape_triangle.tscn")
+var current_scene:PackedScene
+var shape:Global.GameplayShapes
+
+var is_over_document:bool = false
+var mouse_held_down:bool = false
+
 var shape_parent:Control
+
+var current_active_shape:ShapeController
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,6 +33,8 @@ func _ready() -> void:
 	Global.on_finish.connect(on_finish)
 	Global.on_restart.connect(on_restart)
 	
+	get_node("/root/main/backing/texture_image").mouse_entered.connect(on_mouse_entered_texture.bind(true))
+	get_node("/root/main/backing/texture_image").mouse_exited.connect(on_mouse_entered_texture.bind(false))	
 	
 func get_refs():
 	start_game_handle = get_node("/root/main/ui/ui_start_menu")
@@ -61,6 +74,36 @@ func setup():
 	button_C.setup()	
 	
 	Global.on_start.emit()
+	
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("main_action"):
+		await get_tree().process_frame
+		if !current_active_shape and current_scene and state == State.GAMEPLAY_PLACING:
+			instance_scene(true)
+	
+func set_shape(p_shape:Global.GameplayShapes):
+	match p_shape:
+		Global.GameplayShapes.CIRCLE:
+			current_scene = circle_scene
+		Global.GameplayShapes.RECT:
+			current_scene = rect_scene
+		Global.GameplayShapes.LINE:
+			current_scene = line_scene
+	
+func instance_scene(spawn_last:bool = false):
+	var active_shape:ShapeController = current_scene.instantiate()
+	
+	GameManager.shape_parent.add_child(active_shape)
+	active_shape.z_index = 0
+	active_shape.global_position = get_viewport().get_mouse_position()
+	Global.shape_spawned.emit()
+	set_active_shape(active_shape)
+	await active_shape.setup()
+	active_shape.set_mirror_parent(ImageManager.mirror_parent)
+	
+	#set_active_shape(active_shape)
+	if spawn_last:
+		active_shape.advance_state()
 	
 func gameplay_placing_end():
 	set_gameplay_scoring()
@@ -146,6 +189,9 @@ func set_gameplay_placing():
 func set_gameplay_scoring():
 	state = State.GAMEPLAY_SCORING
 
+func set_active_shape(shape:ShapeController):
+	current_active_shape = shape
+
 func is_menu():
 	return true if state == State.START_MENU or state == State.END_SCREEN else false
 	
@@ -154,3 +200,13 @@ func is_placing():
 	
 func is_scoring():
 	return true if state == State.GAMEPLAY_SCORING else false
+
+func on_mouse_entered_texture(action:bool):
+	if action:
+		if Input.is_action_pressed("main_action"):
+			mouse_held_down = true
+		else:
+			mouse_held_down = false
+		is_over_document = true
+	else:
+		is_over_document = false

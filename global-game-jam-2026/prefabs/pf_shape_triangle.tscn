@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl1vwfv3d8scc"]
+
+[ext_resource type="Script" uid="uid://b4igyke568bfg" path="res://scripts/shape_controller.gd" id="1_kjuu8"]
+[ext_resource type="Texture2D" uid="uid://clglulhu4uqx7" path="res://art/textures/shape_triangle.png" id="2_3k5t4"]
+
+[node name="shape_triangle" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("1_kjuu8")
+
+[node name="texture" type="TextureRect" parent="."]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_3k5t4")
+expand_mode = 1
