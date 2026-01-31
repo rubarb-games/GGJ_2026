@@ -32,6 +32,8 @@ var red_score:int = 0
 var white_score:int = 0
 var blue_score:int = 0
 
+var total_score:Array[int]
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Global.viewport_texture_ready.connect(on_texture_ready)
@@ -58,6 +60,7 @@ func setup():
 	get_refs()
 	get_resources_from_folder("res://art/textures/artworks/",all_image_paths)
 	all_images = []
+	total_score = []
 	for p in all_image_paths:
 		var tex = load(p)
 		if tex:
@@ -126,16 +129,17 @@ func stop_gameplay():
 	await SimonTween.start_tween(total_label,"modulate:a",1.0,0.3).tween_finished
 	await get_tree().create_timer(0.15).timeout
 	
+	total_score.append(blue_score - white_score)
+	
 	await get_tree().create_timer(0.5).timeout
-	popup_status_text("I mean, it's alright..",1.0)
+	popup_status_text("Certified \n OK!",1.0)
 	await get_tree().create_timer(0.5).timeout
 	b_l.position.x = -300.0
 	b_r.position.x = 940.0
 	SimonTween.start_tween(b_l,"position:x",b_l.size.x,0.5).set_relative(true)
 	SimonTween.start_tween(b_r,"position:x",-b_r.size.x,0.5).set_relative(true)
 	
-	await get_tree().create_timer(1.75).timeout
-	
+	await get_tree().create_timer(0.25).timeout
 	Global.on_gameplay_started.emit()
 
 func _process(delta: float) -> void:

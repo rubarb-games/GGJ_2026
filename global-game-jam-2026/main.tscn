@@ -94,6 +94,37 @@ offset_bottom = 390.0
 theme = ExtResource("2_0xm2m")
 text = "Restart"
 
+[node name="sum_line" type="ColorRect" parent="ui/ui_end_menu"]
+visible = false
+layout_mode = 0
+offset_left = 25.0
+offset_top = -42.0
+offset_right = 159.0
+offset_bottom = -38.0
+color = Color(0, 0, 0, 1)
+
+[node name="total_score" type="Control" parent="ui/ui_end_menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -298.0
+offset_bottom = -298.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="total_score_label" type="Label" parent="ui/ui_end_menu/total_score"]
+layout_mode = 0
+offset_left = -57.0
+offset_top = 15.0
+offset_right = 35.0
+offset_bottom = 60.0
+theme = ExtResource("2_0xm2m")
+theme_override_font_sizes/font_size = 32
+text = "[xxxx]"
+
 [node name="ui_gameplay" type="Control" parent="ui"]
 unique_name_in_owner = true
 layout_mode = 1
@@ -121,10 +152,11 @@ scale = Vector2(-1, 1)
 
 [node name="gameplay_skip_button" type="Button" parent="ui/ui_gameplay"]
 layout_mode = 0
-offset_left = 235.0
-offset_top = 411.0
-offset_right = 366.0
-offset_bottom = 442.0
+offset_left = 536.0
+offset_top = 747.0
+offset_right = 667.0
+offset_bottom = 778.0
+scale = Vector2(0.625, 0.625)
 text = "SKIP GAMEPLAY"
 
 [node name="gameplay_label" type="Label" parent="ui/ui_gameplay/gameplay_skip_button"]
@@ -359,12 +391,13 @@ texture = SubResource("ViewportTexture_lquwl")
 expand_mode = 1
 
 [node name="TextureRect" type="TextureRect" parent="backing"]
+self_modulate = Color(1, 1, 1, 0)
 texture_filter = 1
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 0
-offset_left = 675.0
+offset_left = 23.0
 offset_top = 673.0
-offset_right = 771.0
+offset_right = 119.0
 offset_bottom = 769.0
 texture = SubResource("ViewportTexture_h2yge")
 

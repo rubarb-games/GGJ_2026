@@ -81,6 +81,47 @@ func on_finish():
 	gameplay_handle.visible = false
 	end_game_handle.visible = true
 	
+	var number_spacing:float = 45.0
+	
+	var total_score_handle:Control = get_node("/root/main/ui/ui_end_menu/total_score")
+	var label_handle = total_score_handle.get_child(0)
+	total_score_handle.visible = true
+	var first_entry = ImageManager.total_score.pop_front()
+	label_handle.text = str(first_entry)
+	var total_sum = first_entry
+	for entry:int in ImageManager.total_score:
+		#var new_label:Label = Label.new()
+		var new_label = label_handle.duplicate()
+		total_score_handle.add_child(new_label)
+		#new_label.position.y = total_score_handle.get_child_count() * 30.0
+		#total_score_handle.add_child(new_label)
+		#new_label.theme = label_handle.theme
+		new_label.modulate.a = 0.0
+		new_label.text = str(entry)
+		SimonTween.start_tween(new_label,"modulate:a",1.0,0.5).set_relative(true)
+		await SimonTween.start_tween(new_label,"position:y",number_spacing,0.5).set_relative(true).tween_finished
+		label_handle = new_label
+		total_sum += entry
+
+	var sum_line:ColorRect = get_node("/root/main/ui/ui_end_menu/sum_line")
+	sum_line.visible = true
+	sum_line.global_position = label_handle.global_position + Vector2(0.0,number_spacing - 2.5)
+
+	var last_label:Label = label_handle.duplicate()
+	total_score_handle.add_child(last_label)
+	#last_label.position.y = total_score_handle.get_child_count() * 30.0
+	await get_tree().create_timer(0.5).timeout
+	last_label.modulate.a = 0.0
+	last_label.text = str(total_sum)
+	
+	last_label.modulate.a = 0.0
+	last_label.text = str(total_sum)
+	SimonTween.start_tween(last_label,"modulate:a",1.0,0.5).set_relative(true)
+	await SimonTween.start_tween(last_label,"position:y",number_spacing,0.5).set_relative(true).tween_finished
+		
+		
+	
+	
 func on_restart():
 	get_tree().reload_current_scene()
 
