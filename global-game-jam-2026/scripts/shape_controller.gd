@@ -160,9 +160,12 @@ func advance_state():
 	SimonTween.start_tween(self.get_child(0),"position:y",-15.0,0.15,Global.anim_curves_A.curve_y)
 
 func die():
+	await SimonTween.start_tween(self,"size",Vector2.ONE * 0.01,0.25).tween_finished
+	await SimonTween.start_tween(mirror_object,"size",Vector2.ONE * 0.01,0.25).tween_finished
 	nuke()
 	
 func nuke():
+	mirror_object.queue_free()
 	self.queue_free()
 
 func on_secondary_action_down():

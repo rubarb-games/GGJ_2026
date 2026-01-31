@@ -20,6 +20,9 @@ var shape:Global.GameplayShapes
 var is_over_document:bool = false
 var mouse_held_down:bool = false
 
+var encounter_no:int = 0
+var max_encounters:int = 5
+
 var shape_parent:Control
 
 var current_active_shape:ShapeController
@@ -32,6 +35,7 @@ func _ready() -> void:
 	Global.on_gameplay_started.connect(on_gameplay_started)
 	Global.on_finish.connect(on_finish)
 	Global.on_restart.connect(on_restart)
+	Global.do_fireworks.connect(on_do_fireworks)
 	
 	get_node("/root/main/backing/texture_image").mouse_entered.connect(on_mouse_entered_texture.bind(true))
 	get_node("/root/main/backing/texture_image").mouse_exited.connect(on_mouse_entered_texture.bind(false))	
@@ -121,6 +125,7 @@ func on_gameplay_started():
 	
 func on_finish():
 	set_end_menu()
+	encounter_no += 1
 	gameplay_handle.visible = false
 	end_game_handle.visible = true
 	
@@ -131,6 +136,10 @@ func on_finish():
 	total_score_handle.visible = true
 	var first_entry = ImageManager.total_score.pop_front()
 	label_handle.text = str(first_entry)
+	if first_entry > 0:
+		label_handle.modulate = Color.GREEN_YELLOW
+	else:
+		label_handle.modulate = Color.PALE_VIOLET_RED
 	var total_sum = first_entry
 	for entry:int in ImageManager.total_score:
 		#var new_label:Label = Label.new()
@@ -141,6 +150,10 @@ func on_finish():
 		#new_label.theme = label_handle.theme
 		new_label.modulate.a = 0.0
 		new_label.text = str(entry)
+		if entry > 0:
+			new_label.modulate = Color.GREEN_YELLOW
+		else:
+			new_label.modulate = Color.PALE_VIOLET_RED
 		SimonTween.start_tween(new_label,"modulate:a",1.0,0.5).set_relative(true)
 		await SimonTween.start_tween(new_label,"position:y",number_spacing,0.5).set_relative(true).tween_finished
 		label_handle = new_label
@@ -156,13 +169,15 @@ func on_finish():
 	await get_tree().create_timer(0.5).timeout
 	last_label.modulate.a = 0.0
 	last_label.text = str(total_sum)
-	
+	if total_sum > 0:
+		last_label.modulate = Color.GOLD
+	else:
+		last_label.modulate = Color.INDIAN_RED
+		
 	last_label.modulate.a = 0.0
 	last_label.text = str(total_sum)
 	SimonTween.start_tween(last_label,"modulate:a",1.0,0.5).set_relative(true)
 	await SimonTween.start_tween(last_label,"position:y",number_spacing,0.5).set_relative(true).tween_finished
-		
-		
 	
 	
 func on_restart():
@@ -210,3 +225,8 @@ func on_mouse_entered_texture(action:bool):
 		is_over_document = true
 	else:
 		is_over_document = false
+
+func on_do_fireworks(pos:Vector2):
+	var fw:CPUParticles2D = get_node("/root/main/fireworks_particles")
+	fw.global_position = pos
+	fw.emitting = true

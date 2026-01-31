@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://cuo3ptjxqjx3y"]
+[gd_scene load_steps=16 format=3 uid="uid://cuo3ptjxqjx3y"]
 
 [ext_resource type="Script" uid="uid://c8vp8nliks2wp" path="res://scripts/main_scene_controller.gd" id="1_ig7tw"]
 [ext_resource type="Theme" uid="uid://cmvlrwijt41ol" path="res://art/misc/main_theme.tres" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://brfsyp2nv7nin" path="res://scripts/shape_button_controller.gd" id="3_1bvp3"]
-[ext_resource type="Texture2D" uid="uid://cqr4covyj4kgu" path="res://icon.svg" id="3_h2yge"]
+[ext_resource type="Shader" uid="uid://bqdt42cqs4jv1" path="res://art/misc/shader/main.gdshader" id="3_7mycd"]
+[ext_resource type="Texture2D" uid="uid://b53p18ypxi2bl" path="res://art/textures/artworks/image_dog__Simon__.png" id="4_272bh"]
 [ext_resource type="Script" uid="uid://d4kkc7l33mjl3" path="res://viewport_texture_controller.gd" id="5_lquwl"]
+[ext_resource type="Theme" uid="uid://bjt8fpp6bwr5m" path="res://art/misc/scoring_theme.tres" id="7_272bh"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_lquwl"]
 viewport_path = NodePath("SubViewport")
@@ -12,8 +14,40 @@ viewport_path = NodePath("SubViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_h2yge"]
 viewport_path = NodePath("SubViewport")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_272bh"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5vw27"]
+resource_local_to_scene = true
+shader = ExtResource("3_7mycd")
+shader_parameter/background_color = Color(0.83264095, 0.6430353, 0.565098, 1)
+shader_parameter/line_color = Color(0.6651376, 0.25708088, 0.28697157, 1)
+shader_parameter/shape_color = Color(0.6556768, 0.5284499, 1, 1)
+shader_parameter/success_color = Color(0.016546702, 0.65280694, 0, 1)
+shader_parameter/fail_color = Color(0.9999998, 0.1892238, 0.49204028, 1)
+shader_parameter/soft_fail_color = Color(0.94900376, 0.8451965, 0.93732643, 1)
+shader_parameter/viewport_tex = SubResource("ViewportTexture_272bh")
+shader_parameter/actual_image = ExtResource("4_272bh")
+shader_parameter/only_orig_image = 0.0
+shader_parameter/only_interior_lines = 0.0
+shader_parameter/only_ext_lines = 0.0
+shader_parameter/only_non_filled_lines = 0.0
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_7mycd"]
 viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Curve" id="Curve_272bh"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.036324788, 100), 0.0, 0.0, 0, 0, Vector2(0.27564102, 100), 0.0, 0.0, 0, 0, Vector2(0.63888896, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_5vw27"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.057692315, 1), 0.0, 0.0, 0, 0, Vector2(0.46367523, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.8934047, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_272bh"]
+offsets = PackedFloat32Array(0, 0.0520362, 0.4366516, 1)
+colors = PackedColorArray(0, 0, 0, 1, 3.9762013, 1.7908298, 0, 1, 1.1374342, 0.46813744, 0.02104537, 0.8117647, 0.9122552, 0.00042008518, 0.8597117, 0)
 
 [node name="main" type="Control"]
 layout_mode = 3
@@ -23,6 +57,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ig7tw")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.45141828, 0.23370734, 0.2850606, 1)
 
 [node name="shape_button_A" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(96, 96)
@@ -40,6 +83,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_0xm2m")
 text = "CIRCLE"
 
 [node name="shape_button_B" type="ColorRect" parent="."]
@@ -58,6 +102,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_0xm2m")
 text = "RECT"
 
 [node name="shape_button_C" type="ColorRect" parent="."]
@@ -76,6 +121,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_0xm2m")
 text = "TRIANGLE"
 
 [node name="backing" type="ColorRect" parent="."]
@@ -128,6 +174,7 @@ color = Color(1, 1, 1, 0)
 
 [node name="texture_overlay" type="TextureRect" parent="backing2"]
 texture_filter = 1
+material = SubResource("ShaderMaterial_5vw27")
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 1
 anchors_preset = 15
@@ -157,7 +204,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_h2yge")
+texture = ExtResource("4_272bh")
 expand_mode = 1
 script = ExtResource("5_lquwl")
 
@@ -188,25 +235,29 @@ mouse_filter = 2
 
 [node name="start_game_label" type="Label" parent="ui/ui_start_menu"]
 layout_mode = 0
-offset_left = 122.0
-offset_top = 257.0
-offset_right = 522.0
+offset_left = 20.0
+offset_top = 170.0
+offset_right = 626.0
 offset_bottom = 345.0
 theme = ExtResource("2_0xm2m")
 theme_override_font_sizes/font_size = 64
-text = "START MENU"
+text = "Selection fill: 
+the game"
+horizontal_alignment = 1
 
 [node name="start_game_button" type="Button" parent="ui/ui_start_menu"]
 layout_mode = 0
-offset_left = 256.0
-offset_top = 359.0
-offset_right = 349.0
-offset_bottom = 390.0
+offset_left = 180.0
+offset_top = 348.0
+offset_right = 486.19354
+offset_bottom = 432.0
 theme = ExtResource("2_0xm2m")
+theme_override_font_sizes/font_size = 32
 text = "Start game"
 
 [node name="ui_end_menu" type="Control" parent="ui"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -223,20 +274,20 @@ offset_bottom = 645.0
 
 [node name="end_game_label" type="Label" parent="ui/ui_end_menu"]
 layout_mode = 0
-offset_left = 123.0
-offset_top = 257.0
-offset_right = 523.0
-offset_bottom = 345.0
+offset_left = 126.0
+offset_top = 480.0
+offset_right = 526.0
+offset_bottom = 568.0
 theme = ExtResource("2_0xm2m")
 theme_override_font_sizes/font_size = 64
 text = "GAME END"
 
 [node name="end_game_button" type="Button" parent="ui/ui_end_menu"]
 layout_mode = 0
-offset_left = 263.0
-offset_top = 359.0
-offset_right = 341.0
-offset_bottom = 390.0
+offset_left = 266.0
+offset_top = 582.0
+offset_right = 344.0
+offset_bottom = 613.0
 theme = ExtResource("2_0xm2m")
 text = "Restart"
 
@@ -248,6 +299,16 @@ offset_top = -42.0
 offset_right = 159.0
 offset_bottom = -38.0
 color = Color(0, 0, 0, 1)
+
+[node name="total_score_label2" type="Label" parent="ui/ui_end_menu"]
+layout_mode = 0
+offset_left = 212.0
+offset_top = 70.0
+offset_right = 450.0
+offset_bottom = 115.0
+theme = ExtResource("7_272bh")
+theme_override_font_sizes/font_size = 32
+text = "Total score:"
 
 [node name="total_score" type="Control" parent="ui/ui_end_menu"]
 layout_mode = 1
@@ -267,12 +328,13 @@ offset_left = -57.0
 offset_top = 15.0
 offset_right = 35.0
 offset_bottom = 60.0
-theme = ExtResource("2_0xm2m")
+theme = ExtResource("7_272bh")
 theme_override_font_sizes/font_size = 32
 text = "[xxxx]"
 
 [node name="ui_gameplay" type="Control" parent="ui"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -280,6 +342,48 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="encounter_text_label" type="Label" parent="ui/ui_gameplay"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -40.0
+offset_top = 3.0
+offset_right = 153.0
+offset_bottom = 48.0
+theme = ExtResource("7_272bh")
+theme_override_colors/font_color = Color(0.7467105, 0.6670103, 0.17020532, 1)
+theme_override_font_sizes/font_size = 16
+text = "art:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="signature_label" type="Label" parent="ui/ui_gameplay"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 415.0
+offset_top = 602.0
+offset_right = 613.0
+offset_bottom = 647.0
+theme = ExtResource("7_272bh")
+theme_override_font_sizes/font_size = 20
+text = "By  [xxxxx]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="encounter_label" type="Label" parent="ui/ui_gameplay"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -1.0
+offset_top = 49.0
+offset_right = 134.0
+offset_bottom = 111.0
+rotation = -0.29204488
+theme = ExtResource("7_272bh")
+theme_override_colors/font_color = Color(0.7467105, 0.6670103, 0.17020532, 1)
+theme_override_font_sizes/font_size = 24
+text = "[x] / [x]"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="barn_doors_left" type="ColorRect" parent="ui/ui_gameplay"]
 z_index = 4
@@ -343,19 +447,19 @@ vertical_alignment = 1
 z_index = 5
 anchors_preset = 0
 offset_left = 311.0
-offset_top = 327.0
+offset_top = 359.0
 offset_right = 351.0
-offset_bottom = 367.0
+offset_bottom = 399.0
 
 [node name="status_label" type="Label" parent="ui/ui_gameplay/status_text_parent"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = -150.0
+offset_left = -328.0
 offset_top = -78.0
-offset_right = 150.0
+offset_right = 332.0
 offset_bottom = 72.0
-pivot_offset = Vector2(150, 75)
-theme = ExtResource("2_0xm2m")
+pivot_offset = Vector2(330, 75)
+theme = ExtResource("7_272bh")
 theme_override_font_sizes/font_size = 64
 text = "CRINGE!"
 horizontal_alignment = 1
@@ -370,10 +474,10 @@ offset_bottom = 40.0
 [node name="scoring_bar" type="ColorRect" parent="ui/ui_gameplay/scoring"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 241.0
-offset_top = 175.0
-offset_right = 378.0
-offset_bottom = 180.0
+offset_left = 202.0
+offset_top = 212.0
+offset_right = 422.0
+offset_bottom = 218.0
 color = Color(0, 0, 0, 1)
 
 [node name="score_label" type="Label" parent="ui/ui_gameplay/scoring"]
@@ -395,7 +499,8 @@ offset_left = 238.0
 offset_top = 88.0
 offset_right = 388.0
 offset_bottom = 133.0
-theme = ExtResource("2_0xm2m")
+theme = ExtResource("7_272bh")
+theme_override_colors/font_color = Color(0.35152128, 0.8406487, 7.70092e-07, 1)
 theme_override_font_sizes/font_size = 32
 text = "[+xx]"
 horizontal_alignment = 1
@@ -408,7 +513,22 @@ offset_left = 238.0
 offset_top = 130.0
 offset_right = 388.0
 offset_bottom = 175.0
-theme = ExtResource("2_0xm2m")
+theme = ExtResource("7_272bh")
+theme_override_colors/font_color = Color(0.9923697, 0.23640567, 0.52098864, 1)
+theme_override_font_sizes/font_size = 32
+text = "[-xx]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="negative_points_B_label" type="Label" parent="ui/ui_gameplay/scoring"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 238.0
+offset_top = 163.0
+offset_right = 388.0
+offset_bottom = 208.0
+theme = ExtResource("7_272bh")
+theme_override_colors/font_color = Color(0.9923697, 0.23640567, 0.52098864, 1)
 theme_override_font_sizes/font_size = 32
 text = "[-xx]"
 horizontal_alignment = 1
@@ -417,12 +537,13 @@ vertical_alignment = 1
 [node name="total_label" type="Label" parent="ui/ui_gameplay/scoring"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 238.0
-offset_top = 185.0
-offset_right = 388.0
-offset_bottom = 230.0
-theme = ExtResource("2_0xm2m")
-theme_override_font_sizes/font_size = 32
+offset_left = 215.0
+offset_top = 217.0
+offset_right = 416.0
+offset_bottom = 305.0
+theme = ExtResource("7_272bh")
+theme_override_colors/font_color = Color(0.9999998, 0.6660834, 0.11343112, 1)
+theme_override_font_sizes/font_size = 64
 text = "[xxx]!!!"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -440,10 +561,10 @@ mouse_filter = 2
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 223.0
-offset_top = 65.0
+offset_top = 43.0
 offset_right = 416.0
-offset_bottom = 110.0
-theme = ExtResource("2_0xm2m")
+offset_bottom = 88.0
+theme = ExtResource("7_272bh")
 theme_override_font_sizes/font_size = 32
 text = "Timer"
 horizontal_alignment = 1
@@ -453,11 +574,33 @@ vertical_alignment = 1
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 223.0
-offset_top = 109.0
+offset_top = 87.0
 offset_right = 416.0
-offset_bottom = 154.0
-theme = ExtResource("2_0xm2m")
+offset_bottom = 132.0
+theme = ExtResource("7_272bh")
 theme_override_font_sizes/font_size = 32
 text = "[xx]"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="fireworks_particles" type="CPUParticles2D" parent="."]
+z_index = 10
+position = Vector2(313, 505)
+emitting = false
+amount = 128
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 0.38
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 350)
+initial_velocity_min = 700.0
+initial_velocity_max = 900.0
+damping_min = 10.0
+damping_max = 60.0
+damping_curve = SubResource("Curve_272bh")
+scale_amount_max = 17.33
+scale_amount_curve = SubResource("Curve_5vw27")
+color = Color(1, 0.46357596, 0.5115773, 1)
+color_ramp = SubResource("Gradient_272bh")

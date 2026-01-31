@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpt8dbfucomy8"
-path="res://.godot/imported/image_icebell_B.png-cba6f803b01d3047a8fbad60c84bba24.ctex"
+uid="uid://cdx6dmrauvf7t"
+path="res://.godot/imported/image_pand__Pand__.png-9b07468ca8812bca6602b5ac39e052b6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/textures/artworks/image_icebell_B.png"
-dest_files=["res://.godot/imported/image_icebell_B.png-cba6f803b01d3047a8fbad60c84bba24.ctex"]
+source_file="res://art/textures/artworks/image_pand__Pand__.png"
+dest_files=["res://.godot/imported/image_pand__Pand__.png-9b07468ca8812bca6602b5ac39e052b6.ctex"]
 
 [params]
 

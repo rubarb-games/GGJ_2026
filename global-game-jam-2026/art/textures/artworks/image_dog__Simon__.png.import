@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b14skq16p34ch"
-path="res://.godot/imported/image_icebell_C.png-44e3d6cd570175c8809c07e7ba73ebe1.ctex"
+uid="uid://b53p18ypxi2bl"
+path="res://.godot/imported/image_dog__Simon__.png-bb9ef460a35c33bb156b10e71281cb82.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/textures/artworks/image_icebell_C.png"
-dest_files=["res://.godot/imported/image_icebell_C.png-44e3d6cd570175c8809c07e7ba73ebe1.ctex"]
+source_file="res://art/textures/artworks/image_dog__Simon__.png"
+dest_files=["res://.godot/imported/image_dog__Simon__.png-bb9ef460a35c33bb156b10e71281cb82.ctex"]
 
 [params]
 

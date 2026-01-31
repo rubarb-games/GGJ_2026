@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bjt8fpp6bwr5m"]
+
+[ext_resource type="FontFile" uid="uid://cnters4i7im7g" path="res://art/misc/fonts/Bungee-Regular.ttf" id="1_wi1in"]
+
+[resource]
+Button/fonts/font = ExtResource("1_wi1in")
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/constants/outline_size = 15
+Label/fonts/font = ExtResource("1_wi1in")

@@ -21,3 +21,5 @@ signal timer_end()
 signal viewport_texture_ready(viewport_texture:ViewportTextureController, mirror_node_parent:Control)
 signal shape_spawned()
 signal shape_placed()
+
+signal do_fireworks(position:Vector2)
