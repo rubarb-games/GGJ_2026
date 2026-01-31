@@ -28,6 +28,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="ui_start_menu" type="Control" parent="ui"]
 unique_name_in_owner = true
@@ -37,6 +38,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="start_game_label" type="Label" parent="ui/ui_start_menu"]
 layout_mode = 0
@@ -65,6 +67,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="ui/ui_end_menu"]
+layout_mode = 0
+offset_top = -1.0
+offset_right = 637.0
+offset_bottom = 645.0
 
 [node name="end_game_label" type="Label" parent="ui/ui_end_menu"]
 layout_mode = 0
@@ -93,6 +102,22 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+
+[node name="barn_doors_left" type="ColorRect" parent="ui/ui_gameplay"]
+z_index = 4
+layout_mode = 0
+offset_left = -298.0
+offset_right = 42.0
+offset_bottom = 640.0
+
+[node name="barn_doors_right" type="ColorRect" parent="ui/ui_gameplay"]
+z_index = 4
+layout_mode = 0
+offset_left = 940.0
+offset_right = 1280.0
+offset_bottom = 640.0
+scale = Vector2(-1, 1)
 
 [node name="gameplay_skip_button" type="Button" parent="ui/ui_gameplay"]
 layout_mode = 0
@@ -110,12 +135,62 @@ offset_right = 106.0
 offset_bottom = 61.0
 text = "Gameplay!"
 
+[node name="shapes_used_text_label" type="Label" parent="ui/ui_gameplay"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 207.0
+offset_top = 546.0
+offset_right = 400.0
+offset_bottom = 591.0
+theme = ExtResource("2_0xm2m")
+theme_override_font_sizes/font_size = 32
+text = "Shapes used"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="shapes_used_label" type="Label" parent="ui/ui_gameplay"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 207.0
+offset_top = 582.0
+offset_right = 400.0
+offset_bottom = 627.0
+theme = ExtResource("2_0xm2m")
+theme_override_font_sizes/font_size = 32
+text = "[x] / [x]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="status_text_parent" type="Control" parent="ui/ui_gameplay"]
+z_index = 5
+anchors_preset = 0
+offset_left = 311.0
+offset_top = 327.0
+offset_right = 351.0
+offset_bottom = 367.0
+
+[node name="status_label" type="Label" parent="ui/ui_gameplay/status_text_parent"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -150.0
+offset_top = -78.0
+offset_right = 150.0
+offset_bottom = 72.0
+pivot_offset = Vector2(150, 75)
+theme = ExtResource("2_0xm2m")
+theme_override_font_sizes/font_size = 64
+text = "CRINGE!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="scoring" type="Control" parent="ui/ui_gameplay"]
+unique_name_in_owner = true
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="ColorRect" type="ColorRect" parent="ui/ui_gameplay/scoring"]
+[node name="scoring_bar" type="ColorRect" parent="ui/ui_gameplay/scoring"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 241.0
 offset_top = 175.0
@@ -124,16 +199,19 @@ offset_bottom = 180.0
 color = Color(0, 0, 0, 1)
 
 [node name="score_label" type="Label" parent="ui/ui_gameplay/scoring"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 264.0
 offset_top = 44.0
 offset_right = 365.0
 offset_bottom = 89.0
+pivot_offset = Vector2(50, 25)
 theme = ExtResource("2_0xm2m")
 theme_override_font_sizes/font_size = 32
 text = "SCORE"
 
 [node name="positive_points_label" type="Label" parent="ui/ui_gameplay/scoring"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 238.0
 offset_top = 88.0
@@ -146,6 +224,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="negative_points_label" type="Label" parent="ui/ui_gameplay/scoring"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 238.0
 offset_top = 130.0
@@ -158,6 +237,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="total_label" type="Label" parent="ui/ui_gameplay/scoring"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 238.0
 offset_top = 185.0
@@ -169,16 +249,37 @@ text = "[xxx]!!!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="ui/ui_gameplay/scoring"]
+[node name="timer" type="Control" parent="ui/ui_gameplay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="timer_text_label" type="Label" parent="ui/ui_gameplay/timer"]
+unique_name_in_owner = true
 layout_mode = 0
-offset_left = 161.0
-offset_top = 227.0
-offset_right = 461.0
-offset_bottom = 377.0
-pivot_offset = Vector2(150, 75)
+offset_left = 223.0
+offset_top = 65.0
+offset_right = 416.0
+offset_bottom = 110.0
 theme = ExtResource("2_0xm2m")
-theme_override_font_sizes/font_size = 64
-text = "CRINGE!"
+theme_override_font_sizes/font_size = 32
+text = "Timer"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="timer_label" type="Label" parent="ui/ui_gameplay/timer"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 223.0
+offset_top = 109.0
+offset_right = 416.0
+offset_bottom = 154.0
+theme = ExtResource("2_0xm2m")
+theme_override_font_sizes/font_size = 32
+text = "[xx]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -242,6 +343,7 @@ z_index = -2
 layout_mode = 0
 offset_right = 640.0
 offset_bottom = 640.0
+mouse_filter = 2
 
 [node name="texture_image" type="TextureRect" parent="backing"]
 unique_name_in_owner = true
@@ -252,6 +354,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = SubResource("ViewportTexture_lquwl")
 expand_mode = 1
 
@@ -259,10 +362,10 @@ expand_mode = 1
 texture_filter = 1
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 0
-offset_left = 27.0
-offset_top = 665.0
-offset_right = 123.0
-offset_bottom = 761.0
+offset_left = 675.0
+offset_top = 673.0
+offset_right = 771.0
+offset_bottom = 769.0
 texture = SubResource("ViewportTexture_h2yge")
 
 [node name="SubViewport" type="SubViewport" parent="."]

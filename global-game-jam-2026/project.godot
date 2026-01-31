@@ -21,6 +21,7 @@ Global="*res://scripts/globals/global.gd"
 GameManager="*res://scripts/game_manager.gd"
 ShapeEvaluator="*res://scripts/shape_evaluator.gd"
 ImageManager="*res://scripts/image_manager.gd"
+SimonTween="*res://scripts/tween_helper.gd"
 
 [display]
 

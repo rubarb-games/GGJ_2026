@@ -1,5 +1,8 @@
 extends Node
 
+enum State { START_MENU, GAMEPLAY_PLACING, GAMEPLAY_SCORING, GAMEPLAY_TRANSITION, END_SCREEN }
+var state:State = State.START_MENU
+
 var start_game_handle:Control
 var gameplay_handle:Control
 var end_game_handle:Control
@@ -34,6 +37,8 @@ func get_refs():
 	
 func on_pre_scene_started():
 	setup()
+	#setup()
+	ImageManager.setup()
 	
 func setup():
 	get_refs()
@@ -57,16 +62,22 @@ func setup():
 	
 	Global.on_start.emit()
 	
+func gameplay_placing_end():
+	set_gameplay_scoring()
+	
 func on_start():
+	set_start_menu()
 	start_game_handle.visible = true
 	await get_tree().create_timer(1.0).timeout
-	ImageManager.setup()
+	#ImageManager.setup()
 
 func on_gameplay_started():
+	set_gameplay_placing()
 	start_game_handle.visible = false
 	gameplay_handle.visible = true
 	
 func on_finish():
+	set_end_menu()
 	gameplay_handle.visible = false
 	end_game_handle.visible = true
 	
@@ -81,3 +92,24 @@ func on_restart_button_pressed():
 
 func on_gameplay_skip_pressed():
 	Global.on_finish.emit()
+
+func set_start_menu():
+	state = State.START_MENU
+	
+func set_end_menu():
+	state = State.END_SCREEN
+	
+func set_gameplay_placing():
+	state = State.GAMEPLAY_PLACING
+	
+func set_gameplay_scoring():
+	state = State.GAMEPLAY_SCORING
+
+func is_menu():
+	return true if state == State.START_MENU or state == State.END_SCREEN else false
+	
+func is_placing():
+	return true if state == State.GAMEPLAY_PLACING else false
+	
+func is_scoring():
+	return true if state == State.GAMEPLAY_SCORING else false

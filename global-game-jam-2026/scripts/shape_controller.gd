@@ -77,4 +77,4 @@ func set_mouse_offset():
 
 func on_deactivate():
 	active = false
-	ImageManager.evaluate_image()
+	Global.shape_placed.emit()
