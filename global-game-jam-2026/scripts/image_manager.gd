@@ -70,10 +70,10 @@ func get_refs():
 	
 func setup():
 	get_refs()
-	get_resources_from_folder("res://art/textures/artworks/",all_image_paths)
-	all_images = []
+	#get_resources_from_folder("res://art/textures/artworks/",all_image_paths)
+	get_resources_from_resource()
+	#all_images = []
 	total_score = []
-	
 	encounter_no = 0
 	
 	for p in all_image_paths:
@@ -301,6 +301,10 @@ func get_resources_from_folder(path:String,arr_to_populate:Array):
 		
 	return true
 
+func get_resources_from_resource():
+	var res:TextureHolder = load("res://art/misc/all_textures.tres")
+	all_images = res.images
+
 func popup_status_text(txt:String,hold_time:float = 0.75):
 	var status_label:Label = get_node("/root/main/ui/ui_gameplay/status_text_parent/status_label")
 	status_label.text = txt
@@ -320,9 +324,12 @@ func start_timer():
 	current_time = 0.0
 	timer_active = true
 
-func stop_timer():
+func stop_timer(shapes:bool = false):
 	timer_active = false
-	popup_status_text("Finish!")
+	if shapes:
+		popup_status_text("Out of shapes!")
+	else:
+		popup_status_text("Time out!")
 	Global.timer_end.emit()
 
 func update_timer(delta:float):
@@ -347,7 +354,7 @@ func add_shape_placed():
 	update_shapes_place_label()
 	
 	if shapes_placed >= max_shapes_placed:
-		stop_timer()
+		stop_timer(true)
 
 func on_gameplay_started():
 	start_gameplay()

@@ -13,7 +13,7 @@ var button_C:ShapeButtonController
 
 var circle_scene:PackedScene = preload("res://prefabs/pf_shape_circle.tscn")
 var rect_scene:PackedScene = preload("res://prefabs/pf_shape_rect.tscn")
-var line_scene:PackedScene = preload("res://prefabs/pf_shape_triangle.tscn")
+var line_scene:PackedScene = preload("res://prefabs/pf_shape_line.tscn")
 var current_scene:PackedScene
 var shape:Global.GameplayShapes
 
@@ -22,6 +22,8 @@ var mouse_held_down:bool = false
 
 var encounter_no:int = 0
 var max_encounters:int = 5
+
+var total_score:int = 0
 
 var shape_parent:Control
 
@@ -54,8 +56,8 @@ func get_refs():
 	
 func on_pre_scene_started():
 	setup()
-	#setup()
 	ImageManager.setup()
+	set_shape(Global.GameplayShapes.RECT)
 	
 func setup():
 	get_refs()
@@ -65,7 +67,7 @@ func setup():
 	end_game_handle.visible = false
 	
 	start_game_handle.get_node("start_game_button").pressed.connect(on_start_button_pressed)
-	end_game_handle.get_node("end_game_button").pressed.connect(on_restart_button_pressed)
+	#end_game_handle.get_node("end_game_button").pressed.connect(on_restart_button_pressed)
 	gameplay_handle.get_node("gameplay_skip_button").pressed.connect(on_gameplay_skip_pressed)
 	
 	button_A.set_gameplay_shape(Global.GameplayShapes.CIRCLE)
@@ -116,6 +118,8 @@ func on_start():
 	set_start_menu()
 	start_game_handle.visible = true
 	await get_tree().create_timer(1.0).timeout
+	
+	LeaderboardsManager.fetch_leaderboard()
 	#ImageManager.setup()
 
 func on_gameplay_started():
@@ -161,14 +165,19 @@ func on_finish():
 
 	var sum_line:ColorRect = get_node("/root/main/ui/ui_end_menu/sum_line")
 	sum_line.visible = true
-	sum_line.global_position = label_handle.global_position + Vector2(0.0,number_spacing - 2.5)
+	sum_line.global_position = label_handle.global_position + Vector2(-25.0,number_spacing - 2.5)
 
 	var last_label:Label = label_handle.duplicate()
 	total_score_handle.add_child(last_label)
-	#last_label.position.y = total_score_handle.get_child_count() * 30.0
-	await get_tree().create_timer(0.5).timeout
+
+	total_score = total_sum
+
+	await get_tree().create_timer(0.75).timeout
 	last_label.modulate.a = 0.0
 	last_label.text = str(total_sum)
+	last_label.scale = Vector2.ONE * 2.0
+	SimonTween.start_tween(last_label,"scale",Vector2.ONE,0.25)
+	Global.do_fireworks.emit(last_label.global_position + (last_label.size/2.0) + Vector2(0.0,number_spacing))
 	if total_sum > 0:
 		last_label.modulate = Color.GOLD
 	else:

@@ -22,11 +22,18 @@ GameManager="*res://scripts/game_manager.gd"
 ShapeEvaluator="*res://scripts/shape_evaluator.gd"
 ImageManager="*res://scripts/image_manager.gd"
 SimonTween="*res://scripts/tween_helper.gd"
+Talo="*res://addons/talo/talo_manager.gd"
+LeaderboardsManager="*res://scripts/leaderboards_manager.gd"
 
 [display]
 
 window/size/viewport_width=640
 window/size/viewport_height=800
+window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/talo/plugin.cfg")
 
 [input]
 

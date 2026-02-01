@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6agtlpwbci6h"]
+
+[ext_resource type="Theme" uid="uid://cmvlrwijt41ol" path="res://art/misc/main_theme.tres" id="1_8j4ju"]
+
+[node name="leaderboard_entry" type="Label"]
+theme = ExtResource("1_8j4ju")
+theme_override_font_sizes/font_size = 32
+text = "1st - Simon - 1000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.88235295, 0.4627451, 0.4117647, 1)

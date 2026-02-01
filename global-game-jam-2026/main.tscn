@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cuo3ptjxqjx3y"]
+[gd_scene load_steps=17 format=3 uid="uid://cuo3ptjxqjx3y"]
 
 [ext_resource type="Script" uid="uid://c8vp8nliks2wp" path="res://scripts/main_scene_controller.gd" id="1_ig7tw"]
 [ext_resource type="Theme" uid="uid://cmvlrwijt41ol" path="res://art/misc/main_theme.tres" id="2_0xm2m"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" uid="uid://bqdt42cqs4jv1" path="res://art/misc/shader/main.gdshader" id="3_7mycd"]
 [ext_resource type="Texture2D" uid="uid://b53p18ypxi2bl" path="res://art/textures/artworks/image_dog__Simon__.png" id="4_272bh"]
 [ext_resource type="Script" uid="uid://d4kkc7l33mjl3" path="res://viewport_texture_controller.gd" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://c6agtlpwbci6h" path="res://prefabs/leaderboard_entry.tscn" id="7_5vw27"]
 [ext_resource type="Theme" uid="uid://bjt8fpp6bwr5m" path="res://art/misc/scoring_theme.tres" id="7_272bh"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_lquwl"]
@@ -70,9 +71,9 @@ color = Color(0.45141828, 0.23370734, 0.2850606, 1)
 [node name="shape_button_A" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 0
-offset_left = 143.0
+offset_left = 138.0
 offset_top = 667.0
-offset_right = 239.0
+offset_right = 234.0
 offset_bottom = 763.0
 script = ExtResource("3_1bvp3")
 
@@ -89,9 +90,9 @@ text = "CIRCLE"
 [node name="shape_button_B" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 0
-offset_left = 279.0
+offset_left = 274.0
 offset_top = 667.0
-offset_right = 375.0
+offset_right = 370.0
 offset_bottom = 763.0
 script = ExtResource("3_1bvp3")
 
@@ -122,7 +123,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_0xm2m")
-text = "TRIANGLE"
+text = "LINE"
 
 [node name="backing" type="ColorRect" parent="."]
 unique_name_in_owner = true
@@ -236,9 +237,9 @@ mouse_filter = 2
 [node name="start_game_label" type="Label" parent="ui/ui_start_menu"]
 layout_mode = 0
 offset_left = 20.0
-offset_top = 170.0
+offset_top = 40.0
 offset_right = 626.0
-offset_bottom = 345.0
+offset_bottom = 215.0
 theme = ExtResource("2_0xm2m")
 theme_override_font_sizes/font_size = 64
 text = "Selection fill: 
@@ -248,12 +249,23 @@ horizontal_alignment = 1
 [node name="start_game_button" type="Button" parent="ui/ui_start_menu"]
 layout_mode = 0
 offset_left = 180.0
-offset_top = 348.0
+offset_top = 218.0
 offset_right = 486.19354
-offset_bottom = 432.0
+offset_bottom = 302.0
 theme = ExtResource("2_0xm2m")
 theme_override_font_sizes/font_size = 32
 text = "Start game"
+
+[node name="leaderboard_entries" type="VBoxContainer" parent="ui/ui_start_menu"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 331.0
+offset_right = 592.0
+offset_bottom = 374.0
+
+[node name="leaderboard_entry" parent="ui/ui_start_menu/leaderboard_entries" instance=ExtResource("7_5vw27")]
+visible = false
+layout_mode = 2
 
 [node name="ui_end_menu" type="Control" parent="ui"]
 unique_name_in_owner = true
@@ -274,22 +286,47 @@ offset_bottom = 645.0
 
 [node name="end_game_label" type="Label" parent="ui/ui_end_menu"]
 layout_mode = 0
-offset_left = 126.0
-offset_top = 480.0
-offset_right = 526.0
-offset_bottom = 568.0
+offset_left = 16.0
+offset_top = 362.0
+offset_right = 621.0
+offset_bottom = 450.0
 theme = ExtResource("2_0xm2m")
 theme_override_font_sizes/font_size = 64
 text = "GAME END"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="submit_score_label" type="Label" parent="ui/ui_end_menu"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 449.0
+offset_right = 621.0
+offset_bottom = 537.0
+theme = ExtResource("2_0xm2m")
+theme_override_font_sizes/font_size = 32
+text = "Submit your score"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="score_textfield" type="TextEdit" parent="ui/ui_end_menu"]
+layout_mode = 0
+offset_left = 139.0
+offset_top = 518.0
+offset_right = 494.0
+offset_bottom = 563.4877
+theme = ExtResource("2_0xm2m")
+theme_override_font_sizes/font_size = 32
+text = "<Your name here>"
 
 [node name="end_game_button" type="Button" parent="ui/ui_end_menu"]
 layout_mode = 0
-offset_left = 266.0
+offset_left = 230.0
 offset_top = 582.0
-offset_right = 344.0
-offset_bottom = 613.0
+offset_right = 429.99994
+offset_bottom = 632.0
+pivot_offset = Vector2(100, 0)
 theme = ExtResource("2_0xm2m")
-text = "Restart"
+text = "SUBMIT"
 
 [node name="sum_line" type="ColorRect" parent="ui/ui_end_menu"]
 visible = false
@@ -334,7 +371,6 @@ text = "[xxxx]"
 
 [node name="ui_gameplay" type="Control" parent="ui"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -360,15 +396,15 @@ vertical_alignment = 1
 [node name="signature_label" type="Label" parent="ui/ui_gameplay"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 415.0
-offset_top = 602.0
-offset_right = 613.0
-offset_bottom = 647.0
+offset_left = 440.0
+offset_top = 593.0
+offset_right = 638.0
+offset_bottom = 638.0
 theme = ExtResource("7_272bh")
 theme_override_font_sizes/font_size = 20
 text = "By  [xxxxx]"
-horizontal_alignment = 1
-vertical_alignment = 1
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [node name="encounter_label" type="Label" parent="ui/ui_gameplay"]
 unique_name_in_owner = true
@@ -401,6 +437,7 @@ offset_bottom = 640.0
 scale = Vector2(-1, 1)
 
 [node name="gameplay_skip_button" type="Button" parent="ui/ui_gameplay"]
+visible = false
 layout_mode = 0
 offset_left = 536.0
 offset_top = 747.0

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://cmvlrwijt41ol"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://cmvlrwijt41ol"]
 
 [ext_resource type="FontFile" uid="uid://cnters4i7im7g" path="res://art/misc/fonts/Bungee-Regular.ttf" id="1_6p3im"]
 
@@ -10,8 +10,13 @@ border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0.6051879, 0.37535527, 0.45518136, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_clvb7"]
+bg_color = Color(0.8901832, 0.5997531, 0.4591425, 1)
+
 [resource]
 Button/fonts/font = ExtResource("1_6p3im")
 Button/styles/normal = SubResource("StyleBoxFlat_6p3im")
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/fonts/font = ExtResource("1_6p3im")
+TextEdit/colors/font_color = Color(0.6653695, 0.13795176, 0.17424148, 1)
+TextEdit/styles/normal = SubResource("StyleBoxFlat_clvb7")

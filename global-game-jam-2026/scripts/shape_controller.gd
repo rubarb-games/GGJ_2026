@@ -97,6 +97,8 @@ func _process(delta: float) -> void:
 				Global.ShapeControlType.SCALE:
 					advance_state()
 				Global.ShapeControlType.STRETCH:
+					advance_state()
+					return
 					var mag:float = Vector2(get_viewport().get_mouse_position() - mouse_offset_tertiary).length() / 2.0
 					self.size.y = mag + initial_size_tertiary.y
 					self.global_position = initial_position_tertiary

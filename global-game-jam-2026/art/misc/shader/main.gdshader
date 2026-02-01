@@ -30,15 +30,15 @@ void fragment() {
 	vec4 final_color = vec4(0.0);
 	final_color.a = 1.0;
 	
-	if (v_tex.b > 0.99 && v_tex.r < 1.0) {
+	if (v_tex.b > 0.9 && v_tex.r < 1.0) {
 		final_color.rgb = line_color.rgb;
 	}
 
-	if (v_tex.r > 0.99 && v_tex.b < 1.0) {
+	if (v_tex.r > 0.9 && v_tex.b < 1.0) {
 		final_color.rgb = shape_color.rgb;
 	}
 	
-	if (v_tex.r > 0.99 && v_tex.b > 0.99) {
+	if (v_tex.r > 0.9 && v_tex.b > 0.99) {
 		final_color.rgb = background_color.rgb;
 	}
 	
@@ -52,7 +52,7 @@ void fragment() {
 	
 	if (only_interior_lines > 0.0) 
 	{
-		if (v_tex.b < 1.0 && ai_tex.r < 1.0) {
+		if (v_tex.b < 0.9 && ai_tex.r < 0.9) {
 			final_color.rgb = mix(final_color.rgb,success_color.rgb,only_interior_lines);
 		} else {
 			final_color.rgb = vec3(1.0);
@@ -61,7 +61,7 @@ void fragment() {
 	
 	if (only_ext_lines > 0.0) 
 	{
-		if (v_tex.b < 1.0 && ai_tex.r > 0.99) {
+		if (v_tex.b < 0.95 && ai_tex.r > 0.95) {
 			final_color.rgb = mix(final_color.rgb,fail_color.rgb,only_ext_lines);
 		} else {
 			final_color.rgb = vec3(1.0);
@@ -69,7 +69,7 @@ void fragment() {
 	}
 	
 	if (only_non_filled_lines > 0.0) {
-		if (v_tex.r < 1.0) {
+		if (v_tex.r < 0.9) {
 			final_color.rgb = mix(final_color.rgb,soft_fail_color.rgb,only_non_filled_lines);
 		} else {
 			final_color.rgb = vec3(1.0);
