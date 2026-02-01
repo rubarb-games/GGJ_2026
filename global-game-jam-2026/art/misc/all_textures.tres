@@ -1,15 +1,20 @@
-[gd_resource type="Resource" script_class="TextureHolder" load_steps=9 format=3 uid="uid://dycy4gktfrxi2"]
+[gd_resource type="Resource" script_class="TextureHolder" load_steps=14 format=3 uid="uid://dycy4gktfrxi2"]
 
 [ext_resource type="Script" uid="uid://dblen1blto5qw" path="res://scripts/texture_holder.gd" id="1_tq2p4"]
-[ext_resource type="Texture2D" uid="uid://bpt8dbfucomy8" path="res://art/textures/artworks/image_cat__Icebell__.png" id="1_xmb65"]
-[ext_resource type="Texture2D" uid="uid://byb224u0u7n0" path="res://art/textures/artworks/image_demonsmilenew__Simon__.png" id="2_ikkaa"]
-[ext_resource type="Texture2D" uid="uid://b53p18ypxi2bl" path="res://art/textures/artworks/image_dog__Simon__.png" id="3_yly25"]
-[ext_resource type="Texture2D" uid="uid://dg37iytdb7u0l" path="res://art/textures/artworks/image_ouhh__Amza__.png" id="4_xmb65"]
-[ext_resource type="Texture2D" uid="uid://cdx6dmrauvf7t" path="res://art/textures/artworks/image_pand__Pand__.png" id="5_pgmin"]
-[ext_resource type="Texture2D" uid="uid://b14skq16p34ch" path="res://art/textures/artworks/image_poop__Icebell__.png" id="6_u2epm"]
-[ext_resource type="Texture2D" uid="uid://dop6qlrwgjprk" path="res://art/textures/artworks/image_smiley__Icebell__.png" id="7_xkk06"]
+[ext_resource type="Texture2D" uid="uid://bpt8dbfucomy8" path="res://art/textures/artworks/image__cat__Icebell__.png" id="1_u2epm"]
+[ext_resource type="Texture2D" uid="uid://byb224u0u7n0" path="res://art/textures/artworks/image__demon smile__Simon__.png" id="2_xkk06"]
+[ext_resource type="Texture2D" uid="uid://b53p18ypxi2bl" path="res://art/textures/artworks/image__dog__Simon__.png" id="3_71aog"]
+[ext_resource type="Texture2D" uid="uid://dg37iytdb7u0l" path="res://art/textures/artworks/image__ouhh__Amza__.png" id="4_c38k4"]
+[ext_resource type="Texture2D" uid="uid://cdx6dmrauvf7t" path="res://art/textures/artworks/image__pand__Pand__.png" id="5_dtftg"]
+[ext_resource type="Texture2D" uid="uid://b14skq16p34ch" path="res://art/textures/artworks/image__poop__Icebell__.png" id="6_1g3ps"]
+[ext_resource type="Texture2D" uid="uid://dop6qlrwgjprk" path="res://art/textures/artworks/image__smiley__Icebell__.png" id="7_3qvrq"]
+[ext_resource type="Texture2D" uid="uid://duuxyel33qnyh" path="res://art/textures/artworks/image__final boss__Fredrik 19 Ar__.png" id="8_q5dkj"]
+[ext_resource type="Texture2D" uid="uid://bf5lngo0lhojt" path="res://art/textures/artworks/image__fine_art__Fredrik 19 Ar__.png" id="9_c1q2g"]
+[ext_resource type="Texture2D" uid="uid://uxsdif8d8vnn" path="res://art/textures/artworks/image__loss__Fredrik 19 Ar__.png" id="10_yeu2j"]
+[ext_resource type="Texture2D" uid="uid://cqc7ltv1kdhuj" path="res://art/textures/artworks/image__triforce__Fredrik 19 Ar__.png" id="11_mlrbw"]
+[ext_resource type="Texture2D" uid="uid://1ywroxoy7w47" path="res://art/textures/artworks/image__penguin__Tommas__.png" id="12_0ycrv"]
 
 [resource]
 script = ExtResource("1_tq2p4")
-images = Array[Texture]([ExtResource("1_xmb65"), ExtResource("2_ikkaa"), ExtResource("3_yly25"), ExtResource("4_xmb65"), ExtResource("5_pgmin"), ExtResource("6_u2epm"), ExtResource("7_xkk06")])
+images = Array[Texture]([ExtResource("1_u2epm"), ExtResource("2_xkk06"), ExtResource("3_71aog"), ExtResource("4_c38k4"), ExtResource("5_dtftg"), ExtResource("6_1g3ps"), ExtResource("7_3qvrq"), ExtResource("8_q5dkj"), ExtResource("9_c1q2g"), ExtResource("10_yeu2j"), ExtResource("11_mlrbw"), ExtResource("12_0ycrv")])
 metadata/_custom_type_script = "uid://dblen1blto5qw"

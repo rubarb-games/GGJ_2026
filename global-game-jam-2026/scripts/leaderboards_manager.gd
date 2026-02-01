@@ -40,8 +40,8 @@ func fetch_leaderboard():
 		new_label.text = "%d. %s : %d " % [pos,player_name,score]
 		
 		if is_even:
-			new_label.get_child(0).color = Color(0.56, 0.512, 0.475, 1.0)
+			new_label.get_child(0).color = Color(0.704, 0.658, 0.622, 1.0)
 		else:
-			new_label.get_child(0).color = Color(0.882, 0.463, 0.412)
+			new_label.get_child(0).color = Color(0.935, 0.617, 0.573, 1.0)
 		is_even = !is_even
 		

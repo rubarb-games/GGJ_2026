@@ -1,13 +1,27 @@
-[gd_scene load_steps=17 format=3 uid="uid://cuo3ptjxqjx3y"]
+[gd_scene load_steps=31 format=3 uid="uid://cuo3ptjxqjx3y"]
 
 [ext_resource type="Script" uid="uid://c8vp8nliks2wp" path="res://scripts/main_scene_controller.gd" id="1_ig7tw"]
 [ext_resource type="Theme" uid="uid://cmvlrwijt41ol" path="res://art/misc/main_theme.tres" id="2_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://b2rl6pyi7arsx" path="res://art/textures/ui_deco_D.png" id="2_074og"]
 [ext_resource type="Script" uid="uid://brfsyp2nv7nin" path="res://scripts/shape_button_controller.gd" id="3_1bvp3"]
 [ext_resource type="Shader" uid="uid://bqdt42cqs4jv1" path="res://art/misc/shader/main.gdshader" id="3_7mycd"]
-[ext_resource type="Texture2D" uid="uid://b53p18ypxi2bl" path="res://art/textures/artworks/image_dog__Simon__.png" id="4_272bh"]
+[ext_resource type="Texture2D" uid="uid://cq72ceairvfa8" path="res://art/textures/ui_deco_C.png" id="3_cegan"]
+[ext_resource type="Texture2D" uid="uid://b53p18ypxi2bl" path="res://art/textures/artworks/image__dog__Simon__.png" id="4_272bh"]
+[ext_resource type="Texture2D" uid="uid://6hjwitvfn6t4" path="res://art/textures/ui_bar_2.png" id="4_efxa6"]
+[ext_resource type="Texture2D" uid="uid://cn63ix540lsbm" path="res://art/textures/icon_circle.png" id="4_vivmo"]
+[ext_resource type="Texture2D" uid="uid://cueypvfi27ab6" path="res://art/textures/icon_rectangle.png" id="5_2cqfq"]
+[ext_resource type="Texture2D" uid="uid://d1ike74gfsuc7" path="res://art/textures/ui_note.png" id="5_dg77c"]
 [ext_resource type="Script" uid="uid://d4kkc7l33mjl3" path="res://viewport_texture_controller.gd" id="5_lquwl"]
+[ext_resource type="Texture2D" uid="uid://b2kw7b8pw02py" path="res://art/textures/ui_note_2.png" id="6_dg77c"]
+[ext_resource type="Texture2D" uid="uid://dk1h2eseiltil" path="res://art/textures/ui_checker.png" id="6_kek77"]
+[ext_resource type="Texture2D" uid="uid://cx65ahtra00u3" path="res://art/textures/icon_line.png" id="6_yaehf"]
 [ext_resource type="PackedScene" uid="uid://c6agtlpwbci6h" path="res://prefabs/leaderboard_entry.tscn" id="7_5vw27"]
+[ext_resource type="Texture2D" uid="uid://c37of7aocnumq" path="res://art/textures/splash.png" id="7_82xsv"]
 [ext_resource type="Theme" uid="uid://bjt8fpp6bwr5m" path="res://art/misc/scoring_theme.tres" id="7_272bh"]
+[ext_resource type="Texture2D" uid="uid://bpsyh1jggsxma" path="res://art/textures/ui_carpet.png" id="16_2cqfq"]
+[ext_resource type="PackedScene" uid="uid://c8s45oeg7ie6v" path="res://prefabs/reaction_face.tscn" id="19_cegan"]
+[ext_resource type="Script" uid="uid://bpruba6klq7pg" path="res://scripts/audio_manager.gd" id="21_getpj"]
+[ext_resource type="AudioStream" uid="uid://drtfp0xlne6qb" path="res://audio/AllYouCanFill.wav" id="22_ryguw"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_lquwl"]
 viewport_path = NodePath("SubViewport")
@@ -15,7 +29,7 @@ viewport_path = NodePath("SubViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_h2yge"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_272bh"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_kek77"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5vw27"]
@@ -27,7 +41,8 @@ shader_parameter/shape_color = Color(0.6556768, 0.5284499, 1, 1)
 shader_parameter/success_color = Color(0.016546702, 0.65280694, 0, 1)
 shader_parameter/fail_color = Color(0.9999998, 0.1892238, 0.49204028, 1)
 shader_parameter/soft_fail_color = Color(0.94900376, 0.8451965, 0.93732643, 1)
-shader_parameter/viewport_tex = SubResource("ViewportTexture_272bh")
+shader_parameter/bg_col = ExtResource("6_kek77")
+shader_parameter/viewport_tex = SubResource("ViewportTexture_kek77")
 shader_parameter/actual_image = ExtResource("4_272bh")
 shader_parameter/only_orig_image = 0.0
 shader_parameter/only_interior_lines = 0.0
@@ -66,64 +81,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.45141828, 0.23370734, 0.2850606, 1)
+color = Color(0.84705883, 0.68235296, 0.54509807, 1)
 
-[node name="shape_button_A" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(96, 96)
+[node name="reaction_face" parent="." instance=ExtResource("19_cegan")]
+z_index = 2
 layout_mode = 0
-offset_left = 138.0
-offset_top = 667.0
-offset_right = 234.0
-offset_bottom = 763.0
-script = ExtResource("3_1bvp3")
-
-[node name="Button" type="Button" parent="shape_button_A"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("2_0xm2m")
-text = "CIRCLE"
-
-[node name="shape_button_B" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(96, 96)
-layout_mode = 0
-offset_left = 274.0
-offset_top = 667.0
-offset_right = 370.0
-offset_bottom = 763.0
-script = ExtResource("3_1bvp3")
-
-[node name="Button" type="Button" parent="shape_button_B"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("2_0xm2m")
-text = "RECT"
-
-[node name="shape_button_C" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(96, 96)
-layout_mode = 0
-offset_left = 414.0
-offset_top = 667.0
-offset_right = 510.0
-offset_bottom = 763.0
-script = ExtResource("3_1bvp3")
-
-[node name="Button" type="Button" parent="shape_button_C"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("2_0xm2m")
-text = "LINE"
+offset_left = 532.00006
+offset_top = 533.0
+offset_right = 572.00006
+offset_bottom = 573.0
+scale = Vector2(1.25, 1.25)
 
 [node name="backing" type="ColorRect" parent="."]
 unique_name_in_owner = true
@@ -234,34 +201,54 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="background" type="TextureRect" parent="ui/ui_start_menu"]
+z_index = -5
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -46.216614
+offset_top = -46.0
+offset_right = 46.216614
+offset_bottom = -117.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_82xsv")
+
 [node name="start_game_label" type="Label" parent="ui/ui_start_menu"]
+z_index = -4
 layout_mode = 0
 offset_left = 20.0
-offset_top = 40.0
+offset_top = 67.0
 offset_right = 626.0
-offset_bottom = 215.0
+offset_bottom = 242.0
 theme = ExtResource("2_0xm2m")
+theme_override_colors/font_outline_color = Color(0.98039216, 0.9607843, 0.84705883, 1)
+theme_override_constants/outline_size = 55
 theme_override_font_sizes/font_size = 64
 text = "Selection fill: 
 the game"
 horizontal_alignment = 1
 
 [node name="start_game_button" type="Button" parent="ui/ui_start_menu"]
+z_index = -4
 layout_mode = 0
-offset_left = 180.0
-offset_top = 218.0
-offset_right = 486.19354
-offset_bottom = 302.0
+offset_left = 165.0
+offset_top = 216.0
+offset_right = 471.19354
+offset_bottom = 300.0
 theme = ExtResource("2_0xm2m")
 theme_override_font_sizes/font_size = 32
 text = "Start game"
 
 [node name="leaderboard_entries" type="VBoxContainer" parent="ui/ui_start_menu"]
+z_index = -4
 layout_mode = 0
 offset_left = 50.0
-offset_top = 331.0
+offset_top = 358.0
 offset_right = 592.0
-offset_bottom = 374.0
+offset_bottom = 401.0
 
 [node name="leaderboard_entry" parent="ui/ui_start_menu/leaderboard_entries" instance=ExtResource("7_5vw27")]
 visible = false
@@ -269,7 +256,7 @@ layout_mode = 2
 
 [node name="ui_end_menu" type="Control" parent="ui"]
 unique_name_in_owner = true
-visible = false
+z_index = -1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -278,13 +265,23 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="ColorRect" type="ColorRect" parent="ui/ui_end_menu"]
-layout_mode = 0
-offset_top = -1.0
-offset_right = 637.0
-offset_bottom = 645.0
+[node name="background" type="TextureRect" parent="ui/ui_end_menu"]
+z_index = -4
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -46.216614
+offset_top = -46.0
+offset_right = 46.216614
+offset_bottom = -117.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_82xsv")
 
 [node name="end_game_label" type="Label" parent="ui/ui_end_menu"]
+visible = false
 layout_mode = 0
 offset_left = 16.0
 offset_top = 362.0
@@ -297,6 +294,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="submit_score_label" type="Label" parent="ui/ui_end_menu"]
+z_index = -3
 layout_mode = 0
 offset_left = 16.0
 offset_top = 449.0
@@ -309,6 +307,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="score_textfield" type="TextEdit" parent="ui/ui_end_menu"]
+z_index = -3
 layout_mode = 0
 offset_left = 139.0
 offset_top = 518.0
@@ -319,6 +318,7 @@ theme_override_font_sizes/font_size = 32
 text = "<Your name here>"
 
 [node name="end_game_button" type="Button" parent="ui/ui_end_menu"]
+z_index = -3
 layout_mode = 0
 offset_left = 230.0
 offset_top = 582.0
@@ -338,13 +338,14 @@ offset_bottom = -38.0
 color = Color(0, 0, 0, 1)
 
 [node name="total_score_label2" type="Label" parent="ui/ui_end_menu"]
+z_index = -4
 layout_mode = 0
-offset_left = 212.0
-offset_top = 70.0
-offset_right = 450.0
-offset_bottom = 115.0
+offset_left = 180.0
+offset_top = 32.0
+offset_right = 465.0
+offset_bottom = 80.0
 theme = ExtResource("7_272bh")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 48
 text = "Total score:"
 
 [node name="total_score" type="Control" parent="ui/ui_end_menu"]
@@ -379,6 +380,51 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="art_counter_backing" type="NinePatchRect" parent="ui/ui_gameplay"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -33.0
+offset_top = 7.0
+offset_right = 41.0
+offset_bottom = 43.0
+scale = Vector2(2, 2)
+texture = ExtResource("5_dg77c")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 14
+patch_margin_bottom = 15
+
+[node name="art_counter_backing2" type="NinePatchRect" parent="ui/ui_gameplay"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 653.0
+offset_top = 595.0
+offset_right = 742.9297
+offset_bottom = 629.4545
+scale = Vector2(-2, 2)
+texture = ExtResource("5_dg77c")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 14
+patch_margin_bottom = 15
+
+[node name="art_counter_backing3" type="NinePatchRect" parent="ui/ui_gameplay"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 434.0
+offset_top = 588.0
+offset_right = 550.9751
+offset_bottom = 625.4545
+scale = Vector2(-2, 2)
+texture = ExtResource("6_dg77c")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 14
+patch_margin_bottom = 15
+
 [node name="encounter_text_label" type="Label" parent="ui/ui_gameplay"]
 unique_name_in_owner = true
 layout_mode = 0
@@ -386,8 +432,7 @@ offset_left = -40.0
 offset_top = 3.0
 offset_right = 153.0
 offset_bottom = 48.0
-theme = ExtResource("7_272bh")
-theme_override_colors/font_color = Color(0.7467105, 0.6670103, 0.17020532, 1)
+theme = ExtResource("2_0xm2m")
 theme_override_font_sizes/font_size = 16
 text = "art:"
 horizontal_alignment = 1
@@ -396,45 +441,42 @@ vertical_alignment = 1
 [node name="signature_label" type="Label" parent="ui/ui_gameplay"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 440.0
-offset_top = 593.0
-offset_right = 638.0
-offset_bottom = 638.0
-theme = ExtResource("7_272bh")
-theme_override_font_sizes/font_size = 20
+offset_left = 430.0
+offset_top = 608.0
+offset_right = 628.0
+offset_bottom = 653.0
+theme = ExtResource("2_0xm2m")
+theme_override_font_sizes/font_size = 14
 text = "By  [xxxxx]"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="artwork_label" type="Label" parent="ui/ui_gameplay"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 430.0
+offset_top = 584.0
+offset_right = 628.0
+offset_bottom = 629.0
+theme = ExtResource("2_0xm2m")
+theme_override_font_sizes/font_size = 24
+text = "[xxxxxxx]"
 horizontal_alignment = 2
 vertical_alignment = 2
 
 [node name="encounter_label" type="Label" parent="ui/ui_gameplay"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = -1.0
-offset_top = 49.0
-offset_right = 134.0
-offset_bottom = 111.0
-rotation = -0.29204488
-theme = ExtResource("7_272bh")
-theme_override_colors/font_color = Color(0.7467105, 0.6670103, 0.17020532, 1)
+offset_left = -15.0
+offset_top = 22.0
+offset_right = 120.0
+offset_bottom = 84.0
+rotation = -0.108024165
+theme = ExtResource("2_0xm2m")
 theme_override_font_sizes/font_size = 24
 text = "[x] / [x]"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="barn_doors_left" type="ColorRect" parent="ui/ui_gameplay"]
-z_index = 4
-layout_mode = 0
-offset_left = -298.0
-offset_right = 42.0
-offset_bottom = 640.0
-
-[node name="barn_doors_right" type="ColorRect" parent="ui/ui_gameplay"]
-z_index = 4
-layout_mode = 0
-offset_left = 940.0
-offset_right = 1280.0
-offset_bottom = 640.0
-scale = Vector2(-1, 1)
 
 [node name="gameplay_skip_button" type="Button" parent="ui/ui_gameplay"]
 visible = false
@@ -457,12 +499,12 @@ text = "Gameplay!"
 [node name="shapes_used_text_label" type="Label" parent="ui/ui_gameplay"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 207.0
-offset_top = 546.0
-offset_right = 400.0
-offset_bottom = 591.0
+offset_left = 205.0
+offset_top = 589.0
+offset_right = 434.0
+offset_bottom = 634.0
 theme = ExtResource("2_0xm2m")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 16
 text = "Shapes used"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -471,11 +513,11 @@ vertical_alignment = 1
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 207.0
-offset_top = 582.0
-offset_right = 400.0
-offset_bottom = 627.0
+offset_top = 616.0
+offset_right = 433.0
+offset_bottom = 661.0
 theme = ExtResource("2_0xm2m")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 text = "[x] / [x]"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -598,9 +640,9 @@ mouse_filter = 2
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 223.0
-offset_top = 43.0
+offset_top = 10.0
 offset_right = 416.0
-offset_bottom = 88.0
+offset_bottom = 55.0
 theme = ExtResource("7_272bh")
 theme_override_font_sizes/font_size = 32
 text = "Timer"
@@ -611,14 +653,230 @@ vertical_alignment = 1
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 223.0
-offset_top = 87.0
+offset_top = 54.0
 offset_right = 416.0
-offset_bottom = 132.0
+offset_bottom = 99.0
 theme = ExtResource("7_272bh")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 48
 text = "[xx]"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="low_bar" type="Control" parent="."]
+z_index = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="decoratives" type="Control" parent="low_bar"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="ColorRect2" type="ColorRect" parent="low_bar/decoratives"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 641.0
+offset_right = 600.0
+offset_bottom = 774.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.84705883, 0.68235296, 0.54509807, 1)
+
+[node name="lower_screen_bar" type="NinePatchRect" parent="low_bar/decoratives"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 636.0
+offset_right = 642.0
+offset_bottom = 676.0
+texture = ExtResource("4_efxa6")
+
+[node name="TextureRect" type="TextureRect" parent="low_bar/decoratives"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 44.0
+offset_top = 659.0
+offset_right = 84.0
+offset_bottom = 699.0
+mouse_filter = 2
+texture = ExtResource("2_074og")
+
+[node name="TextureRect2" type="TextureRect" parent="low_bar/decoratives"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 572.0
+offset_top = 760.0
+offset_right = 592.0
+offset_bottom = 780.0
+mouse_filter = 2
+texture = ExtResource("3_cegan")
+
+[node name="shape_tools_label" type="Label" parent="low_bar/decoratives"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 775.0
+offset_right = 625.0
+offset_bottom = 802.0
+theme = ExtResource("2_0xm2m")
+theme_override_font_sizes/font_size = 24
+text = "Your shape tools!"
+horizontal_alignment = 1
+
+[node name="shape_button_A" type="ColorRect" parent="low_bar"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 0
+offset_left = 138.0
+offset_top = 669.0
+offset_right = 234.0
+offset_bottom = 765.0
+mouse_filter = 2
+script = ExtResource("3_1bvp3")
+
+[node name="Button" type="Button" parent="low_bar/shape_button_A"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_0xm2m")
+
+[node name="icon_Circle" type="TextureRect" parent="low_bar/shape_button_A/Button"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_vivmo")
+
+[node name="shape_button_B" type="ColorRect" parent="low_bar"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 0
+offset_left = 274.0
+offset_top = 669.0
+offset_right = 370.0
+offset_bottom = 765.0
+mouse_filter = 2
+script = ExtResource("3_1bvp3")
+
+[node name="Button" type="Button" parent="low_bar/shape_button_B"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_0xm2m")
+
+[node name="icon_rect" type="TextureRect" parent="low_bar/shape_button_B"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_2cqfq")
+
+[node name="shape_button_C" type="ColorRect" parent="low_bar"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 0
+offset_left = 414.0
+offset_top = 669.0
+offset_right = 510.0
+offset_bottom = 765.0
+mouse_filter = 2
+script = ExtResource("3_1bvp3")
+
+[node name="Button" type="Button" parent="low_bar/shape_button_C"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_0xm2m")
+
+[node name="icon_rect2" type="TextureRect" parent="low_bar/shape_button_C"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_yaehf")
+
+[node name="curtains" type="Control" parent="."]
+z_index = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="curtains_status" type="Control" parent="curtains"]
+visible = false
+anchors_preset = 0
+offset_left = 316.0
+offset_top = 356.0
+offset_right = 356.0
+offset_bottom = 396.0
+
+[node name="curtains_status_label" type="Label" parent="curtains/curtains_status"]
+layout_mode = 0
+offset_left = -123.0
+offset_top = -21.0
+offset_right = 114.0
+offset_bottom = 27.0
+theme = ExtResource("7_272bh")
+theme_override_font_sizes/font_size = 48
+text = "[xxxxx]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="barn_doors_left" type="ColorRect" parent="curtains"]
+z_index = -1
+layout_mode = 0
+offset_left = -320.0
+offset_right = 20.0
+offset_bottom = 640.0
+color = Color(1, 1, 1, 0)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="curtains/barn_doors_left"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -124.0
+offset_top = -23.0
+offset_right = 354.0
+offset_bottom = 689.0
+texture = ExtResource("16_2cqfq")
+region_rect = Rect2(58.224976, 30.443253, 159.82518, 185.77705)
+
+[node name="barn_doors_right" type="ColorRect" parent="curtains"]
+z_index = -1
+layout_mode = 0
+offset_left = 940.0
+offset_right = 1280.0
+offset_bottom = 640.0
+scale = Vector2(-1, 1)
+color = Color(1, 1, 1, 0)
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="curtains/barn_doors_right"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -152.76404
+offset_top = -23.0
+offset_right = 347.0
+offset_bottom = 689.0
+texture = ExtResource("16_2cqfq")
+region_rect = Rect2(58.224976, 30.443253, 159.82518, 185.77705)
 
 [node name="fireworks_particles" type="CPUParticles2D" parent="."]
 z_index = 10
@@ -641,3 +899,17 @@ scale_amount_max = 17.33
 scale_amount_curve = SubResource("Curve_5vw27")
 color = Color(1, 0.46357596, 0.5115773, 1)
 color_ramp = SubResource("Gradient_272bh")
+
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="audio" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("21_getpj")
+
+[node name="music" type="AudioStreamPlayer2D" parent="audio"]
+stream = ExtResource("22_ryguw")

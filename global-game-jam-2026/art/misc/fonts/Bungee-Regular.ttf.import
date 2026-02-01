@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/Bungee-Regular.ttf-cc9b9c71b213b49d8203d6b5a5
 [params]
 
 Rendering=null
-antialiasing=1
+antialiasing=0
 generate_mipmaps=false
 disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false

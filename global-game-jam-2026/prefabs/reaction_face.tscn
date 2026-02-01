@@ -1,0 +1,100 @@
+[gd_scene load_steps=10 format=3 uid="uid://c8s45oeg7ie6v"]
+
+[ext_resource type="Texture2D" uid="uid://b11ttn366esok" path="res://art/textures/ui_bad_person.png" id="1_j660g"]
+[ext_resource type="Script" uid="uid://dcnx1o62us38b" path="res://scripts/reaction_face_controller.gd" id="1_jf54b"]
+[ext_resource type="Texture2D" uid="uid://bqcavb7bt7p6j" path="res://art/textures/ui_good_person.png" id="2_jf54b"]
+[ext_resource type="Texture2D" uid="uid://dow00ddnw2byb" path="res://art/textures/ui_deco_E.png" id="4_y2gmj"]
+[ext_resource type="Texture2D" uid="uid://pcmssn0lsslb" path="res://art/textures/happy_eyes.png" id="5_dg6qw"]
+[ext_resource type="Texture2D" uid="uid://bbopphpdqsh6g" path="res://art/textures/angry_eyes.png" id="6_t87g1"]
+
+[sub_resource type="Curve" id="Curve_y55hk"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.036324788, 100), 0.0, 0.0, 0, 0, Vector2(0.27564102, 100), 0.0, 0.0, 0, 0, Vector2(0.63888896, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_dg6qw"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.057692315, 1), 0.0, 0.0, 0, 0, Vector2(0.46367523, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.8934047, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_t87g1"]
+offsets = PackedFloat32Array(0, 0.0520362, 0.32527474)
+colors = PackedColorArray(0, 0, 0, 1, 2.6134334, 2.6134334, 2.6134334, 1, 1, 1, 1, 0)
+
+[node name="reaction_face" type="Control"]
+z_index = -1
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 41.0
+offset_bottom = 39.0
+script = ExtResource("1_jf54b")
+
+[node name="face_bad" type="TextureRect" parent="."]
+texture_filter = 1
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 0
+offset_left = -125.0
+offset_top = -138.0
+offset_right = 131.0
+offset_bottom = 118.0
+texture = ExtResource("1_j660g")
+
+[node name="face_happy" type="TextureRect" parent="."]
+texture_filter = 1
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 0
+offset_left = -125.0
+offset_top = -138.0
+offset_right = 131.0
+offset_bottom = 118.0
+texture = ExtResource("2_jf54b")
+
+[node name="reaction_particles" type="CPUParticles2D" parent="."]
+z_index = 10
+texture_filter = 1
+position = Vector2(-6, -40)
+emitting = false
+amount = 128
+texture = ExtResource("4_y2gmj")
+lifetime = 3.0
+randomness = 1.0
+lifetime_randomness = 0.38
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 350)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+damping_min = 2.0
+damping_max = 3.0
+damping_curve = SubResource("Curve_y55hk")
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_dg6qw")
+color = Color(0.81960785, 0.4745098, 0.2901961, 1)
+color_ramp = SubResource("Gradient_t87g1")
+
+[node name="eyes" type="Control" parent="."]
+anchors_preset = 0
+offset_left = -6.0
+offset_top = -57.0
+offset_right = 34.0
+offset_bottom = -17.0
+
+[node name="eyes_happy" type="TextureRect" parent="eyes"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -56.0
+offset_top = -41.0
+offset_right = 7.0
+offset_bottom = -1.0
+scale = Vector2(1.7283971, 1.7283971)
+texture = ExtResource("5_dg6qw")
+
+[node name="eyes_bad" type="TextureRect" parent="eyes"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -54.999996
+offset_top = -40.0
+offset_right = 8.000004
+scale = Vector2(1.7283971, 1.7283971)
+texture = ExtResource("6_t87g1")

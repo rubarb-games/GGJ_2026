@@ -1,6 +1,7 @@
 extends Node
 
 var anim_curves_A:CurveXYZTexture = load("res://art/misc/anim_curves_A.tres")
+var anim_curves_B:CurveXYZTexture = load("res://art/misc/anim_curves_B.tres")
 
 enum ShapeControlType { SCALE, STRETCH }
 enum GameplayShapes { CIRCLE, RECT, LINE }
@@ -23,3 +24,6 @@ signal shape_spawned()
 signal shape_placed()
 
 signal do_fireworks(position:Vector2)
+
+signal popup_happy(position:Vector2)
+signal popup_angry(position:Vector2)

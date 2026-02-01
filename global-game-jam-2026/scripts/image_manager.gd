@@ -84,20 +84,22 @@ func setup():
 	all_images.shuffle()
 	
 func start_gameplay():
-	var b_l = ui_gameplay_handle.get_node("barn_doors_left")
-	var b_r = ui_gameplay_handle.get_node("barn_doors_right")
-	b_l.position.x = 0.0 #-300.0
-	b_r.position.x = 640.0 #940.0
-	SimonTween.start_tween(b_l,"position:x",-b_l.size.x,0.5).set_relative(true)
-	SimonTween.start_tween(b_r,"position:x",b_r.size.x,0.5).set_relative(true)
 	
 	encounter_no += 1
+	#var new_image_path = #all_images.pop_front()
+	if all_images.size() < 1 or encounter_no > max_encounters:
+		print("YOU WON!")
+		Global.on_finish.emit()
+		return 
+	
+	GameManager.open_barn_doors()
+	
 	get_node("/root/main/ui/ui_gameplay/encounter_label").text = "%d / %d" % [encounter_no, max_encounters] 
 	
-	update_shapes_place_label()
-	start_timer()
-	
 	shapes_placed = 0
+	update_shapes_place_label()
+	
+	start_timer()
 	
 	scoring_handle.visible = false
 	timer_handle.visible = true
@@ -107,7 +109,9 @@ func start_gameplay():
 	pixels = AmericanPixels.new()
 	new_image()
 	
-	get_node("/root/main/ui/ui_gameplay/signature_label").text = "By %s" % current_texture.resource_path.split("__").get(1)
+	var signature_text = current_texture.resource_path.split("__")
+	get_node("/root/main/ui/ui_gameplay/artwork_label").text = "\"%s\"" % signature_text.get(1)
+	get_node("/root/main/ui/ui_gameplay/signature_label").text = "By %s" % signature_text.get(2)
 	
 	timer_handle.modulate.a = 0.0
 	await get_tree().create_timer(1.0).timeout
@@ -129,8 +133,8 @@ func stop_gameplay():
 	negative_B_label.text = ""
 	total_label.text = ""
 	
-	var b_l = ui_gameplay_handle.get_node("barn_doors_left")
-	var b_r = ui_gameplay_handle.get_node("barn_doors_right")
+	#var b_l = ui_gameplay_handle.get_node("barn_doors_left")
+	#var b_r = ui_gameplay_handle.get_node("barn_doors_right")
 	
 	var scoring_bar_size:float = scoring_bar.size.x
 	scoring_bar.size.x = 0.0
@@ -183,13 +187,17 @@ func stop_gameplay():
 	await get_tree().create_timer(0.25).timeout
 	if final_score > 0:
 		popup_status_text("Certified \n OK!",1.0)
+		Global.popup_happy.emit(Vector2.ZERO)
 	else:
 		popup_status_text("Wow, it bad??",1.0)
+		Global.popup_angry.emit(Vector2.ZERO)
 	await get_tree().create_timer(0.75).timeout
-	b_l.position.x = -300.0
-	b_r.position.x = 940.0
-	SimonTween.start_tween(b_l,"position:x",b_l.size.x,0.5).set_relative(true)
-	SimonTween.start_tween(b_r,"position:x",-b_r.size.x,0.5).set_relative(true)
+	
+	GameManager.close_barn_doors()
+	#b_l.position.x = -300.0
+	#b_r.position.x = 940.0
+	#SimonTween.start_tween(b_l,"position:x",b_l.size.x,0.5).set_relative(true)
+	#SimonTween.start_tween(b_r,"position:x",-b_r.size.x,0.5).set_relative(true)
 	
 	await get_tree().create_timer(0.4).timeout
 	top_level_texture.material.set_shader_parameter("only_non_filled_lines",0.0)
@@ -215,14 +223,7 @@ func new_image():
 	for i:Control in GameManager.shape_parent.get_children():
 		i.queue_free()
 		
-	#var new_image_path = #all_images.pop_front()
-	if all_images.size() < 1 or encounter_no > max_encounters:
-		print("YOU WON!")
-		Global.on_finish.emit()
-		return 
-		
 	var tex = all_images.pop_front()
-	
 	display_texture.texture = tex
 	viewport_texture.texture = tex
 	#reference_texture.texture = tex
@@ -275,7 +276,7 @@ func calculate_score():
 	
 	red_score = red_offset * 4.0
 	blue_score = blue_offset
-	white_score = white_offset * 2.0
+	white_score = white_offset * 1.2
 	white_score_B = pixels.get_blue() * 0.25
 
 func get_resources_from_folder(path:String,arr_to_populate:Array):

@@ -8,6 +8,8 @@ uniform vec4 success_color:source_color = vec4(1.0,1.0,1.0,1.0);
 uniform vec4 fail_color:source_color = vec4(1.0,1.0,1.0,1.0);
 uniform vec4 soft_fail_color:source_color = vec4(1.0,1.0,1.0,1.0);
 
+uniform sampler2D bg_col:source_color, filter_nearest, repeat_enable;
+
 uniform sampler2D viewport_tex:source_color, filter_nearest;
 uniform sampler2D actual_image:source_color, filter_nearest;
 
@@ -43,6 +45,11 @@ void fragment() {
 	}
 	
 	
+	float avg = (v_tex.r + v_tex.g + v_tex.b) * 0.33;
+	if (avg > 0.9)
+	{
+		final_color.rgb = texture(bg_col,UV*9.0).rgb;
+	}
 	
 	
 	float avg_var = (only_interior_lines + only_ext_lines + only_non_filled_lines) / 3.0;

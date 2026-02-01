@@ -186,7 +186,7 @@ func set_mouse_offset():
 
 func on_deactivate(disable_signal:bool = false):
 	active = false
-	if GameManager.is_over_document:
+	if GameManager.is_over_document or true:
 		GameManager.set_active_shape(null)
 		if !disable_signal:
 			Global.shape_placed.emit()

@@ -49,9 +49,9 @@ func get_refs():
 	
 	shape_parent = get_node("/root/main/shape_parent")
 	
-	button_A = get_node("/root/main/shape_button_A")
-	button_B = get_node("/root/main/shape_button_B")
-	button_C = get_node("/root/main/shape_button_C")
+	button_A = get_node("/root/main/low_bar/shape_button_A")
+	button_B = get_node("/root/main/low_bar/shape_button_B")
+	button_C = get_node("/root/main/low_bar/shape_button_C")
 	
 	
 func on_pre_scene_started():
@@ -128,15 +128,25 @@ func on_gameplay_started():
 	gameplay_handle.visible = true
 	
 func on_finish():
+	#await close_barn_doors()
+	var total_score_handle:Control = get_node("/root/main/ui/ui_end_menu/total_score")
+	var label_handle = total_score_handle.get_child(0)
+	label_handle.text = ""
+	
 	set_end_menu()
-	encounter_no += 1
 	gameplay_handle.visible = false
 	end_game_handle.visible = true
+	await popup_curtain_status("Finish!")
+	await get_tree().create_timer(1.0).timeout
+	await open_barn_doors()
+	disable_curtain_popup()
+	encounter_no += 1
+	
+	await get_tree().create_timer(0.5).timeout
 	
 	var number_spacing:float = 45.0
 	
-	var total_score_handle:Control = get_node("/root/main/ui/ui_end_menu/total_score")
-	var label_handle = total_score_handle.get_child(0)
+
 	total_score_handle.visible = true
 	var first_entry = ImageManager.total_score.pop_front()
 	label_handle.text = str(first_entry)
@@ -165,13 +175,16 @@ func on_finish():
 
 	var sum_line:ColorRect = get_node("/root/main/ui/ui_end_menu/sum_line")
 	sum_line.visible = true
-	sum_line.global_position = label_handle.global_position + Vector2(-25.0,number_spacing - 2.5)
+	sum_line.global_position = label_handle.global_position + Vector2(-25.0,number_spacing - 5.0)
 
 	var last_label:Label = label_handle.duplicate()
 	total_score_handle.add_child(last_label)
 
 	total_score = total_sum
-
+	
+	await popup_curtain_status("Final score..")
+	await get_tree().create_timer(0.1).timeout
+	await disable_curtain_popup()
 	await get_tree().create_timer(0.75).timeout
 	last_label.modulate.a = 0.0
 	last_label.text = str(total_sum)
@@ -187,13 +200,88 @@ func on_finish():
 	last_label.text = str(total_sum)
 	SimonTween.start_tween(last_label,"modulate:a",1.0,0.5).set_relative(true)
 	await SimonTween.start_tween(last_label,"position:y",number_spacing,0.5).set_relative(true).tween_finished
+
+func open_barn_doors():
+	var b_l = get_node("/root/main/curtains/barn_doors_left")
+	var b_r = get_node("/root/main/curtains/barn_doors_right")
 	
+	var open_position_l = -320.0
+	var open_position_r = 960.0
+	var closed_position_l = 0.0
+	var closed_position_r = 640.0
+	
+	b_l.position.x = 0.0 #-300.0
+	b_r.position.x = 640.0 #940.0
+	
+	SimonTween.start_tween(b_l,"position:x",open_position_l,0.5,Global.anim_curves_B.curve_x)
+	await SimonTween.start_tween(b_r,"position:x",open_position_r,0.5,Global.anim_curves_B.curve_x).tween_finished
+	return true
+
+func close_barn_doors():
+	var b_l = get_node("/root/main/curtains/barn_doors_left")
+	var b_r = get_node("/root/main/curtains/barn_doors_right")
+
+	var open_position_l = -320.0
+	var open_position_r = 960.0
+	var closed_position_l = 0.0
+	var closed_position_r = 640.0
+	
+	b_l.position.x = -300.0
+	b_r.position.x = 940.0
+	
+	SimonTween.start_tween(b_l,"position:x",closed_position_l,0.5,Global.anim_curves_B.curve_x)
+	await SimonTween.start_tween(b_r,"position:x",closed_position_r,0.5,Global.anim_curves_B.curve_x).tween_finished
+	return true
+	
+func transition_to_gameplay():
+	await close_barn_doors()
+	start_game_handle.visible = false
+	var status_handle:Control = get_node("/root/main/curtains/curtains_status")
+	var status_label:Label = status_handle.get_node("curtains_status_label")
+	status_handle.visible = true
+	
+	var status_messages:Array[String] = [	"Get ready!",
+											"3!",
+											"2!",
+											"1!",
+											"Go!"]
+	
+	var anim_time:float = 0.25
+	for i in range(status_messages.size()):
+		var message:String = status_messages[i]
+		await popup_curtain_status(message)
+		if i == 0:
+			await get_tree().create_timer(anim_time * 4.0).timeout
+	
+	disable_curtain_popup()
+	await get_tree().create_timer(anim_time).timeout
+	Global.on_gameplay_started.emit()
+	
+func popup_curtain_status(message:String):
+	var anim_time = 0.25
+	var status_handle:Control = get_node("/root/main/curtains/curtains_status")
+	var status_label:Label = status_handle.get_node("curtains_status_label")
+	status_handle.visible = true
+		
+	status_label.text = message
+	status_handle.scale = Vector2.ONE * 2.0
+	status_handle.rotation = 0.0
+	SimonTween.start_tween(status_handle,"scale",Vector2.ONE,anim_time,Global.anim_curves_A.curve_x)
+	await SimonTween.start_tween(status_handle,"rotation",deg_to_rad(10),anim_time*2.0,Global.anim_curves_A.curve_z).tween_finished
+	return true
+
+func disable_curtain_popup():
+	var status_handle:Control = get_node("/root/main/curtains/curtains_status")
+	await SimonTween.start_tween(status_handle,"modulate:a",0.0,0.25).tween_finished
+	status_handle.visible = false
+	status_handle.modulate.a = 1.0
+	return true
 	
 func on_restart():
 	get_tree().reload_current_scene()
 
 func on_start_button_pressed():
-	Global.on_gameplay_started.emit()
+	transition_to_gameplay()
 
 func on_restart_button_pressed():
 	Global.on_restart.emit()
